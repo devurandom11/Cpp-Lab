@@ -33,5 +33,9 @@
     "**/.*/**",
     "**/.vscode",
     "**/.vscode/**"
-  ]
+  ],
+  "files.associations": {
+    "*.txt": "plaintext",
+    "ostream": "cpp"
+  }
 }

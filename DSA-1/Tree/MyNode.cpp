@@ -17,12 +17,12 @@ MyNode::MyNode(int v)
     value = v;
     left = NULL;
     right = NULL;
-    operation = NULL;
+    operation = '\0';
 }
 
 int MyNode::calculate()
 {
-    if (isdigit(value))
+    if (value != 0)
     {
         return value;
     }
@@ -37,6 +37,16 @@ int MyNode::calculate()
         case '*':
             return left->calculate() * right->calculate();
         case '/':
+            if (right->calculate() == 0)
+            {
+                std::cerr << "Division by zero is not allowed!" << std::endl;
+                return 0;
+            }
+            else if (left->calculate() % right->calculate() != 0)
+            {
+                std::cerr << "Division is not an integer!" << std::endl;
+                return 0;
+            }
             return left->calculate() / right->calculate();
         default:
             return 0;
