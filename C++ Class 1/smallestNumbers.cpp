@@ -49,7 +49,6 @@ int main()
     unsigned int j;
     int userInput;
     int userInputs;
-    int smallestNum;
     vector<int> userList;
 
     cin >> userInput;
@@ -61,7 +60,7 @@ int main()
 
     for (i = 0; i < userList.size(); i++)
     {
-        smallestNum = userList.at(i);
+        int smallestNum = userList.at(i);
         for (j = i + 1; j < userList.size(); j++)
         {
             if (userList.at(j) < userList.at(i))
