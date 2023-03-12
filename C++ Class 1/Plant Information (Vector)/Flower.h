@@ -3,7 +3,7 @@
 
 #include "Plant.h"
 #include <string>
-using namespace std;
+
 
 class Flower : public Plant
 {
@@ -12,15 +12,15 @@ public:
 
     bool GetPlantType() const;
 
-    void SetColorOfFlowers(string userColorOfFlowers);
+    void SetColorOfFlowers(std::string userColorOfFlowers);
 
-    string GetColorOfFlowers() const;
+    std::string GetColorOfFlowers() const;
 
     void PrintInfo() const;
 
 private:
     bool isAnnual;
-    string colorOfFlowers;
+    std::string colorOfFlowers;
 };
 
 #endif
