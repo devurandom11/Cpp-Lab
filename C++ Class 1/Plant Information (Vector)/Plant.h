@@ -2,16 +2,16 @@
 #define PLANTH
 
 #include <string>
-using namespace std;
+
 
 class Plant
 {
 public:
     virtual ~Plant();
 
-    void SetPlantName(string userPlantName);
+    void SetPlantName(std::string userPlantName);
 
-    string GetPlantName() const;
+    std::string GetPlantName() const;
 
     void SetPlantCost(int userPlantCost);
 
@@ -20,7 +20,7 @@ public:
     virtual void PrintInfo() const;
 
 protected:
-    string plantName;
+    std::string plantName;
     int plantCost;
 };
 
