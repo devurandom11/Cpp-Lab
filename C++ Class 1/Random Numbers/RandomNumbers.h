@@ -2,7 +2,7 @@
 #define RANDOMNUMBERS_H_
 
 #include <iostream>
-using namespace std;
+
 
 class RandomNumbers
 {
