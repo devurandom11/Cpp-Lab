@@ -91,7 +91,7 @@ int main()
     {
         userNum2 = 1;
     }
-    else if (userNum2 <= 12)
+    else
     {
         cout << "userNum2 is less than or equal to 12." << endl;
     }
