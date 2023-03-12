@@ -1,7 +1,7 @@
 #ifndef VENDINGMACHINE_H_
 #define VENDINGMACHINE_H_
 #include <iostream>
-using namespace std;
+
 // Declare the VendingMachine class here
 class VendingMachine
 {
