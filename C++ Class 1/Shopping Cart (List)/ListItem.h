@@ -3,20 +3,19 @@
 
 #include <string>
 
-using namespace std;
 
 class ListItem
 {
 public:
    ListItem();
 
-   ListItem(string itemInit);
+   ListItem(std::string itemInit);
 
    // Print this node
    void PrintNodeData();
 
 private:
-   string item;
+   std::string item;
 };
 
 #endif
