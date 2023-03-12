@@ -4,18 +4,16 @@
 #include <string>
 
 MyNode::MyNode(MyNode *l, MyNode *r, char op) {
-  value = NULL;
+  value = -1;
   left = l;
   right = r;
   operation = op;
 }
 
-/// @brief
-/// @param v
 MyNode::MyNode(int v) {
   value = v;
-  left = NULL;
-  right = NULL;
+  left = nullptr;
+  right = nullptr;
   operation = '\0';
 }
 

@@ -1,10 +1,9 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
 class InventoryNode {
  private:
-  string item;
+  std::string item;
   int numberOfItems;
   InventoryNode *nextNodeRef;
 
@@ -17,14 +16,15 @@ class InventoryNode {
   }
 
   // Constructor
-  InventoryNode(string itemInit, int numberOfItemsInit) {
+  InventoryNode(std::string itemInit, int numberOfItemsInit) {
     this->item = itemInit;
     this->numberOfItems = numberOfItemsInit;
     this->nextNodeRef = NULL;
   }
 
   // Constructor
-  InventoryNode(string itemInit, int numberOfItemsInit, InventoryNode nextLoc) {
+  InventoryNode(std::string itemInit, int numberOfItemsInit,
+                InventoryNode nextLoc) {
     this->item = itemInit;
     this->numberOfItems = numberOfItemsInit;
     this->nextNodeRef = &nextLoc;
@@ -43,6 +43,6 @@ class InventoryNode {
 
   // Print node data
   void PrintNodeData() {
-    cout << this->numberOfItems << " " << this->item << endl;
+    std::cout << this->numberOfItems << " " << this->item << std::endl;
   }
 };
