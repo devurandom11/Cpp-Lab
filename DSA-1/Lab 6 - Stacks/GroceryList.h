@@ -24,12 +24,14 @@ class GroceryList {
     // TODO
   }
 
-  virtual void SwapWithUndo(int index1, int index2) {
-    // TODO
-  }
+  virtual void SwapWithUndo(int index1, int index2) {}
 
   virtual void ExecuteUndo() {
     // TODO
+    UndoCommand* command = undoStack.top();
+    undoStack.pop();
+    command->Execute();
+    delete command;
   }
 
   virtual int GetListSize() const { return (int)listItems.size(); }

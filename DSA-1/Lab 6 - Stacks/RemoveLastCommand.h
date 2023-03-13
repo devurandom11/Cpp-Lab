@@ -12,9 +12,7 @@ class RemoveLastCommand : public UndoCommand {
 
  public:
   RemoveLastCommand(std::vector<std::string>* vector) : sourceVector(vector){};
-  void Execute() override {
-    // TODO
-  }
+  void Execute() override { sourceVector->pop_back(); }
 };
 
 #endif

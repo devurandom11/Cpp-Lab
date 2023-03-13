@@ -3,6 +3,7 @@
 #include <string>
 
 #include "GroceryList.h"
+
 using namespace std;
 
 bool ParseIndices(std::string str, int& outIndex1, int& outIndex2) {
@@ -36,6 +37,7 @@ int main(int argc, char* argv[]) {
       groceryList.RemoveAtWithUndo(index);
     } else if (0 == command.find("swap ")) {
       int index1 = -1, index2 = -1;
+
       if (ParseIndices(command.substr(5), index1, index2)) {
         groceryList.SwapWithUndo(index1, index2);
       } else {
