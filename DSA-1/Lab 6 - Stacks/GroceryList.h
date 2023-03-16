@@ -24,7 +24,12 @@ class GroceryList {
     // TODO
   }
 
-  virtual void SwapWithUndo(int index1, int index2) {}
+  virtual void SwapWithUndo(int index1, int index2) {
+    std::string temp = listItems.at(index1);
+    listItems.at(index1) = listItems.at(index2);
+    listItems.at(index2) = temp;
+    undoStack.push(new SwapCommand(index1, index2, &listItems));
+  }
 
   virtual void ExecuteUndo() {
     // TODO
