@@ -1,6 +1,7 @@
 # 5.9 LAB: Grocery list editor with undo stack
 
 In this lab a grocery list editor with undo functionality is implemented.
+
 - Step 1: Inspect the UndoCommand abstract base class
 
 The read-only UndoCommand.h file has a declaration for the UndoCommand abstract base class. Access UndoCommand.h by clicking on the orange arrow next to main.cpp at the top of the coding window. The UndoCommand class represents a command object: an object that stores all needed information to execute an action at a later point in time. For this lab, a command object stores information to undo a grocery list change made by the user.
