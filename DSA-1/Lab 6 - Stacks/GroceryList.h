@@ -25,6 +25,10 @@ class GroceryList {
   }
 
   virtual void SwapWithUndo(int index1, int index2) {
+    if (index1 < 0 || index1 >= listItems.size() || index2 < 0 ||
+        index2 >= listItems.size()) {
+      return;
+    }
     std::string temp = listItems.at(index1);
     listItems.at(index1) = listItems.at(index2);
     listItems.at(index2) = temp;
