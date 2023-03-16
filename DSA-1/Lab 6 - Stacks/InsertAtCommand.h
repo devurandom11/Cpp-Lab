@@ -8,12 +8,19 @@
 
 class InsertAtCommand : public UndoCommand {
  private:
-  // TODO
+  int insertBefore;
+  std::string insertItem;
+  std::vector<std::string>* sourceVector;
+
  public:
-  // TODO
+  InsertAtCommand(int insertBefore, std::string insertItem,
+                  std::vector<std::string>* sourceVector)
+      : insertBefore(insertBefore),
+        insertItem(insertItem),
+        sourceVector(sourceVector) {}
 
   void Execute() override {
-    // TODO
+    sourceVector->insert(sourceVector->begin() + insertBefore, insertItem);
   }
 };
 

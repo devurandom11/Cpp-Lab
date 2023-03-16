@@ -22,11 +22,17 @@ class GroceryList {
 
   virtual void RemoveAtWithUndo(int removalIndex) {
     // TODO
+    if (removalIndex < 0 || removalIndex >= (int)listItems.size()) {
+      return;
+    }
+    std::string removedItem = listItems.at(removalIndex);
+    listItems.erase(listItems.begin() + removalIndex);
+    undoStack.push(new InsertAtCommand(removalIndex, removedItem, &listItems));
   }
 
   virtual void SwapWithUndo(int index1, int index2) {
-    if (index1 < 0 || index1 >= listItems.size() || index2 < 0 ||
-        index2 >= listItems.size()) {
+    if (index1 < 0 || index1 >= (int)listItems.size() || index2 < 0 ||
+        index2 >= (int)listItems.size()) {
       return;
     }
     std::string temp = listItems.at(index1);
