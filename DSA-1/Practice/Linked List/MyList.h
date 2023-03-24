@@ -1,15 +1,18 @@
 #ifndef MYLIST_H
 #define MYLIST_H
-
-#include <iostream>
-#include <string>
 #include <vector>
+
+#include "MyLinkedNode.h"
 
 class MyList {
  private:
-  /* data */
+  MyLinkedNode* head;
+  MyLinkedNode* tail;
+  int size;
+
  public:
-  MyList(/* args */);
+  MyList();
+  MyList(MyLinkedNode* head, MyLinkedNode* tail, int size);
   ~MyList();
 };
 

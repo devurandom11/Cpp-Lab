@@ -1,13 +1,17 @@
 #ifndef MYLINKEDNODE_H
 #define MYLINKEDNODE_H
 
-#include "MyList.h"
+#include <iostream>
+#include <string>
 
 class MyLinkedNode {
  private:
-  /* data */
+  std::string data;
+  MyLinkedNode* next;
+
  public:
-  MyLinkedNode(/* args */);
+  MyLinkedNode();
+  MyLinkedNode(std::string data, MyLinkedNode* next);
   ~MyLinkedNode();
 };
 
