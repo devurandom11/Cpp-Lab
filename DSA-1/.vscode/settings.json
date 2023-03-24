@@ -1,7 +1,0 @@
-{
-  "cSpell.words": ["LABPRINTER"],
-  "files.associations": {
-    "*.txt": "plaintext",
-    "xstring": "cpp"
-  }
-}
