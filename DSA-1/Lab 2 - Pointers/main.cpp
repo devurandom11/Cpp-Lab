@@ -1,5 +1,7 @@
 #include "InventoryNode.h"
 
+using namespace std;
+
 int main() {
   int count;
   int numItems;
