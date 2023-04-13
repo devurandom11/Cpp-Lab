@@ -14,7 +14,7 @@ class BSTChecker {
   static constexpr int MIN = std::numeric_limits<int>::min();
 
   static Node* DFSHelper(Node* node, int minKey, int maxKey,
-                         std::unordered_set<Node*>& visited) {
+                         std::unordered_set<Node*>& visited, Node* parent) {
     if (!node) {
       return nullptr;
     }
@@ -29,9 +29,16 @@ class BSTChecker {
       return node;
     }
 
-    Node* leftOffender = DFSHelper(node->left, minKey, node->key - 1, visited);
+    // Check if left or right child is pointing to the parent
+    if ((node->left && node->left == parent) ||
+        (node->right && node->right == parent)) {
+      return node;
+    }
+
+    Node* leftOffender =
+        DFSHelper(node->left, minKey, node->key - 1, visited, node);
     Node* rightOffender =
-        DFSHelper(node->right, node->key + 1, maxKey, visited);
+        DFSHelper(node->right, node->key + 1, maxKey, visited, node);
 
     return leftOffender ? leftOffender : rightOffender;
   }
@@ -40,7 +47,7 @@ class BSTChecker {
   static Node* CheckBSTValidity(Node* root) {
     // Pass in a set for memoization
     std::unordered_set<Node*> visited;
-    return DFSHelper(root, MIN, MAX, visited);
+    return DFSHelper(root, MIN, MAX, visited, nullptr);
   }
 };
 
