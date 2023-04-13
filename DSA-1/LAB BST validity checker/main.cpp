@@ -1,8 +1,7 @@
-#include <iostream>
 #include <string>
 
-#include "MyBSTChecker.h"
-#include "MyTreeNode.h"
+#include "./BSTChecker.h"
+#include "./Node.h"
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -11,9 +10,9 @@ int main(int argc, char* argv[]) {
   getline(cin, userInput);
 
   // Parse into a binary ree
-  MyTreeNode* userRoot = MyTreeNode::Parse(userInput);
+  Node* userRoot = Node::Parse(userInput);
   if (userRoot) {
-    MyTreeNode* badNode = MyBSTChecker::CheckBSTValidity(userRoot);
+    Node* badNode = BSTChecker::CheckBSTValidity(userRoot);
     if (badNode) {
       cout << to_string(badNode->key) << endl;
     } else {
@@ -23,5 +22,5 @@ int main(int argc, char* argv[]) {
     cout << "Failed to parse input tree" << endl;
   }
 
-  MyTreeNode::DeleteTree(userRoot);
+  Node::DeleteTree(userRoot);
 }

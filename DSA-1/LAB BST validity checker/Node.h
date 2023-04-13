@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-class MyTreeNode {
+class Node {
  private:
   static std::string RemoveLeadingWhitespace(std::string str) {
     int i = 0;
@@ -25,17 +25,16 @@ class MyTreeNode {
 
  public:
   int key;
-  MyTreeNode* left;
-  MyTreeNode* right;
+  Node* left;
+  Node* right;
 
-  MyTreeNode(int nodeKey, MyTreeNode* leftChild = nullptr,
-             MyTreeNode* rightChild = nullptr) {
+  Node(int nodeKey, Node* leftChild = nullptr, Node* rightChild = nullptr) {
     key = nodeKey;
     left = leftChild;
     right = rightChild;
   }
 
-  virtual ~MyTreeNode() {}
+  virtual ~Node() {}
 
   // Counts the number of nodes in this tree
   virtual int Count() {
@@ -50,7 +49,7 @@ class MyTreeNode {
     return 1 + leftCount + rightCount;
   }
 
-  static void DeleteTree(MyTreeNode* root) {
+  static void DeleteTree(Node* root) {
     if (root) {
       DeleteTree(root->left);
       DeleteTree(root->right);
@@ -59,8 +58,8 @@ class MyTreeNode {
   }
 
   // Inserts the new node into the tree.
-  virtual void Insert(MyTreeNode* node) {
-    MyTreeNode* currentNode = this;
+  virtual void Insert(Node* node) {
+    Node* currentNode = this;
     while (currentNode) {
       if (node->key < currentNode->key) {
         if (currentNode->left) {
@@ -82,18 +81,18 @@ class MyTreeNode {
 
   virtual void InsertAll(const std::vector<int>& keys) {
     for (int key : keys) {
-      Insert(new MyTreeNode(key));
+      Insert(new Node(key));
     }
   }
 
-  static MyTreeNode* Parse(std::string treeString) {
+  static Node* Parse(std::string treeString) {
     // # A node is enclosed in parentheses with a either just a key: (key),
     // or a key, left child, and right child triplet: (key, left, right). The
     // left and right children, if present, can be either a nested node or
     // "null".
 
     // Remove leading whitespace first
-    treeString = MyTreeNode::RemoveLeadingWhitespace(treeString);
+    treeString = Node::RemoveLeadingWhitespace(treeString);
 
     // The string must be non-empty, start with "(", and end with ")"
     if (0 == treeString.length() || treeString[0] != '(' ||
@@ -120,7 +119,7 @@ class MyTreeNode {
 
     // If no commas, treeString is expected to be just the node's key
     if (0 == commaIndices.size()) {
-      return new MyTreeNode(std::stoi(treeString));
+      return new Node(std::stoi(treeString));
     }
 
     // If number of commas is not 2, then the string's format is invalid
@@ -136,11 +135,11 @@ class MyTreeNode {
     std::string piece3 = treeString.substr(i2 + 1);
 
     // Make the node with just the key
-    MyTreeNode* nodeToReturn = new MyTreeNode(stoi(piece1));
+    Node* nodeToReturn = new Node(stoi(piece1));
 
     // Recursively parse children
-    nodeToReturn->left = MyTreeNode::Parse(piece2);
-    nodeToReturn->right = MyTreeNode::Parse(piece3);
+    nodeToReturn->left = Node::Parse(piece2);
+    nodeToReturn->right = Node::Parse(piece3);
     return nodeToReturn;
   }
 };

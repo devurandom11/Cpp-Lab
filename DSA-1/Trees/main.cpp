@@ -4,21 +4,21 @@
 
 // Binary tree implementation using structs only
 
-struct MyTreeNode {
+struct Node {
   int data;
-  MyTreeNode* left;
-  MyTreeNode* right;
+  Node* left;
+  Node* right;
 };
 
-MyTreeNode* createNode(int data) {
-  MyTreeNode* newNode = new MyTreeNode();
+Node* createNode(int data) {
+  Node* newNode = new Node();
   newNode->data = data;
   newNode->left = nullptr;
   newNode->right = nullptr;
   return newNode;
 }
 
-void insertNode(MyTreeNode* root, int data) {
+void insertNode(Node* root, int data) {
   if (data < root->data) {
     if (root->left == nullptr) {
       root->left = createNode(data);
@@ -34,7 +34,7 @@ void insertNode(MyTreeNode* root, int data) {
   }
 }
 
-void printTree(MyTreeNode* root) {
+void printTree(Node* root) {
   if (root == nullptr) {
     return;
   }
@@ -94,7 +94,7 @@ class myTree {
 
 int main() {
   // Struct implementation
-  MyTreeNode* root = createNode(5);
+  Node* root = createNode(5);
   insertNode(root, 3);
   insertNode(root, 7);
   insertNode(root, 1);
