@@ -20,18 +20,22 @@ class BSTChecker {
   // Static helper method
   static Node* LastTryHelper(Node* node, int minKey, int maxKey,
                              std::vector<Node*>& ancestors) {
-    // Base cases
+    // Base case
     if (!node) {
       return nullptr;
     }
-    if (node->key < minKey || node->key > maxKey) {
-      return node;
-    }
-    if (std::find(ancestors.begin(), ancestors.end(), node->left) !=
-            ancestors.end() ||
-        std::find(ancestors.begin(), ancestors.end(), node->right) !=
+
+    // Check if current node violates BST rule or is an ancestor
+    if (node->key < minKey || node->key > maxKey ||
+        std::find(ancestors.begin(), ancestors.end(), node) !=
             ancestors.end()) {
       return node;
+    } else if (std::find(ancestors.begin(), ancestors.end(), node->left) !=
+               ancestors.end()) {
+      return ancestors.back();
+    } else if (std::find(ancestors.begin(), ancestors.end(), node->right) !=
+               ancestors.end()) {
+      return ancestors.back();
     }
 
     // Recursive case
