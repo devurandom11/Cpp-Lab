@@ -2,6 +2,7 @@
 #define MYTREENODE_H
 
 #include <cctype>
+#include <iostream>
 #include <string>
 #include <vector>
 
