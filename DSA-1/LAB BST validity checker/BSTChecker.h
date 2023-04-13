@@ -2,46 +2,35 @@
 #define BSTCHECKER_H
 
 #include <iostream>
+#include <limits>
 
 #include "Node.h"
 
 class BSTChecker {
- public:
-  static Node* CheckBSTValidity(Node* rootNode) {
-    Node* violation = nullptr;
-    // Check if the left subtree is valid
-    if (rootNode->left) {
-      // Traverse the tree to the rightmost node
-      Node* rightmost = rootNode->left->right;
-      while (rightmost && rightmost->right) {
-        rightmost = rightmost->right;
-      }
-      // If the rightmost node is greater than the root, then there is a
-      // violation
-      if (rightmost && rightmost->key > rootNode->key) {
-        violation = rightmost;
-      } else {
-        // Otherwise, check the left subtree
-        violation = CheckBSTValidity(rootNode->left);
-      }
-    }
-    // Check if the right subtree is valid
-    if (rootNode->right && !violation) {
-      // Traverse the tree to the leftmost node
-      Node* leftmost = rootNode->right->left;
-      while (leftmost && leftmost->left) {
-        leftmost = leftmost->left;
-      }
-      // If the leftmost node is less than the root, then there is a violation
-      if (leftmost && leftmost->key < rootNode->key) {
-        violation = leftmost;
-      } else {
-        // Otherwise, check the right subtree
-        violation = CheckBSTValidity(rootNode->right);
-      }
+ private:
+  // Declare constexpr variables for maximum and minimum int values
+  static constexpr int MAX = std::numeric_limits<int>::max();
+  static constexpr int MIN = std::numeric_limits<int>::min();
+
+  static Node* DFSHelper(Node* node, int minKey, int maxKey) {
+    // Perform a DFS traversal of the tree, checking the validity of each node
+    if (!node) {
+      return nullptr;
     }
 
-    return violation;
+    if (node->key < minKey || node->key > maxKey) {
+      return node;
+    }
+
+    Node* leftOffender = DFSHelper(node->left, minKey, node->key - 1);
+    Node* rightOffender = DFSHelper(node->right, node->key + 1, maxKey);
+
+    return leftOffender ? leftOffender : rightOffender;
+  }
+
+ public:
+  static Node* CheckBSTValidity(Node* root) {
+    return DFSHelper(root, MIN, MAX);
   }
 };
 
