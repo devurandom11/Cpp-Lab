@@ -1,0 +1,39 @@
+{
+  "name": "C++ Launch",
+  "type": "cppdbg",
+  "request": "launch",
+  "program": "${workspaceFolder}/main",
+  "stopAtEntry": false,
+  "customLaunchSetupCommands": [
+    {
+      "text": "target-run",
+      "description": "run target",
+      "ignoreFailures": false
+    }
+  ],
+  "launchCompleteCommand": "exec-run",
+  "linux": {
+    "MIMode": "gdb",
+    "miDebuggerPath": "/usr/bin/gdb"
+  },
+  "osx": {
+    "MIMode": "lldb"
+  },
+  "windows": {
+    "MIMode": "lldb",
+    "miDebuggerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\Llvm\\x64\\bin\\lldb.exe"
+  },
+  "configurations": [
+    {
+      "name": "(Windows) Launch",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.exe",
+      "args": [],
+      "stopAtEntry": true,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "console": "internalConsole"
+    }
+  ]
+}
