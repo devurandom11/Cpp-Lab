@@ -12,6 +12,31 @@ class ExtendedAVLTree : public AVLTree {
   }
 
   // Your code here
+  virtual void InsertNode(BSTNode* node) override {
+    // Call parent
+    AVLTree::InsertNode(node);
+
+    // Update subtree key counts
+    while (node) {
+      ((ExtendedAVLNode*)node)->IncrementSubtreeKeyCount();
+      node = node->GetParent();
+    }
+  }
+
+  virtual bool RemoveNode(BSTNode* node) override {
+    // Call parent
+    BSTNode* parent = node->GetParent();
+
+    bool removed = AVLTree::RemoveNode(node);
+
+    if (removed) {
+      while (parent) {
+        ((ExtendedAVLNode*)parent)->DecrementSubtreeKeyCount();
+        parent = parent->GetParent();
+      }
+    }
+    return removed;
+  }
 
  public:
   virtual int GetNthKey(int n) override {

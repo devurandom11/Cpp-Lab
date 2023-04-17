@@ -12,7 +12,13 @@ class ExtendedAVLNode : public AVLNode {
 
   virtual int GetSubtreeKeyCount() override { return subtreeKeyCount; }
 
-  // Your code here
+  virtual void IncrementSubtreeKeyCount() {
+    subtreeKeyCount = GetSubtreeKeyCount() + 1;
+  }
+
+  virtual void DecrementSubtreeKeyCount() {
+    subtreeKeyCount = GetSubtreeKeyCount() - 1;
+  }
 };
 
 #endif
