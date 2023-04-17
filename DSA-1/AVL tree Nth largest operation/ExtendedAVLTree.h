@@ -17,17 +17,17 @@ class ExtendedAVLTree : public AVLTree {
     AVLNode* newRoot = AVLTree::Rebalance(node);
 
     // Update subtreeKeyCount for the current node
-    ExtendedAVLNode* extendedNode = static_cast<ExtendedAVLNode*>(node);
+    ExtendedAVLNode* extendedNode = (ExtendedAVLNode*)node;
     int leftCount = 0;
     int rightCount = 0;
     if (extendedNode->GetLeft()) {
-      leftCount = static_cast<ExtendedAVLNode*>(extendedNode->GetLeft())
-                      ->GetSubtreeKeyCount();
+      leftCount =
+          ((ExtendedAVLNode*)extendedNode)->GetLeft()->GetSubtreeKeyCount();
     }
 
     if (extendedNode->GetRight()) {
-      rightCount = static_cast<ExtendedAVLNode*>(extendedNode->GetRight())
-                       ->GetSubtreeKeyCount();
+      rightCount =
+          ((ExtendedAVLNode*)extendedNode)->GetRight()->GetSubtreeKeyCount();
     }
 
     extendedNode->SetSubtreeKeyCount(leftCount + rightCount + 1);
@@ -41,17 +41,16 @@ class ExtendedAVLTree : public AVLTree {
     // Update subtreeKeyCount for ancestors of the removed node
     BSTNode* parentNode = nodeToRemove->GetParent();
     while (parentNode) {
-      ExtendedAVLNode* extendedNode = static_cast<ExtendedAVLNode*>(parentNode);
-      int leftCount =
-          extendedNode->GetLeft()
-              ? static_cast<ExtendedAVLNode*>(extendedNode->GetLeft())
-                    ->GetSubtreeKeyCount()
-              : 0;
-      int rightCount =
-          extendedNode->GetRight()
-              ? static_cast<ExtendedAVLNode*>(extendedNode->GetRight())
-                    ->GetSubtreeKeyCount()
-              : 0;
+      ExtendedAVLNode* extendedNode = (ExtendedAVLNode*)parentNode;
+      int leftCount = extendedNode->GetLeft() ? ((ExtendedAVLNode*)extendedNode)
+                                                    ->GetLeft()
+                                                    ->GetSubtreeKeyCount()
+                                              : 0;
+      int rightCount = extendedNode->GetRight()
+                           ? ((ExtendedAVLNode*)extendedNode)
+                                 ->GetRight()
+                                 ->GetSubtreeKeyCount()
+                           : 0;
       extendedNode->SetSubtreeKeyCount(leftCount + rightCount + 1);
       parentNode = parentNode->GetParent();
     }
@@ -62,7 +61,26 @@ class ExtendedAVLTree : public AVLTree {
  public:
   virtual int GetNthKey(int n) override {
     // Your code here (remove placeholder line below)
-    return 0;
+    if (n < 0 || n >= ((ExtendedAVLNode*)root)->GetSubtreeKeyCount()) {
+      return -1;
+    }
+
+    ExtendedAVLNode* currentNode = (ExtendedAVLNode*)root;
+    while (currentNode) {
+      int leftSubtreeKeyCount =
+          currentNode->GetLeft()
+              ? ((ExtendedAVLNode*)currentNode)->GetLeft()->GetSubtreeKeyCount()
+              : 0;
+      if (n < leftSubtreeKeyCount) {
+        currentNode = (ExtendedAVLNode*)currentNode->GetLeft();
+      } else if (n == leftSubtreeKeyCount) {
+        return currentNode->GetKey();
+      } else {
+        n -= (leftSubtreeKeyCount + 1);
+        currentNode = (ExtendedAVLNode*)currentNode->GetRight();
+      }
+    }
+    return -1;
   }
 };
 
