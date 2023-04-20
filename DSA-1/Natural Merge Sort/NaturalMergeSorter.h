@@ -18,7 +18,32 @@ class NaturalMergeSorter {
   }
 
   virtual void NaturalMergeSort(int* array, int arrayLength) {
-    // Your code here
+    bool sorted = false;
+
+    while (!sorted) {
+      sorted = true;
+      int i = 0;
+
+      while (i < arrayLength) {
+        int leftRunLength = GetSortedRunLength(array, arrayLength, i);
+        if (leftRunLength == 0) {
+          return;
+        }
+
+        int leftLastIndex = i + leftRunLength - 1;
+
+        if (leftLastIndex + 1 < arrayLength) {
+          int rightRunLength =
+              GetSortedRunLength(array, arrayLength, leftLastIndex + 1);
+          int rightLastIndex = leftLastIndex + rightRunLength + 1;
+
+          Merge(array, i, leftLastIndex, rightLastIndex);
+          sorted = false;
+        }
+
+        i = leftLastIndex + leftRunLength + 1;
+      }
+    }
   }
 
   virtual void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
