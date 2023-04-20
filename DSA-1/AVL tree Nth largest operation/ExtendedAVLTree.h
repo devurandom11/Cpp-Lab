@@ -1,5 +1,6 @@
 #ifndef EXTENDEDAVLTREE_H
 #define EXTENDEDAVLTREE_H
+#include <iostream>
 
 #include "AVLTree.h"
 #include "ExtendedAVLNode.h"
