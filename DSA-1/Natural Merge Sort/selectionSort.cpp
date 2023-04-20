@@ -51,6 +51,7 @@ int main() {
   int numbersSize = sizeof(numbers) / sizeof(numbers[0]);
 
   // Display the contents of the array
+  cout << "---- Selection sort ----" << endl;
   cout << "UNSORTED: " << ArrayToString(numbers, numbersSize) << endl;
 
   // Call the SelectionSort function
