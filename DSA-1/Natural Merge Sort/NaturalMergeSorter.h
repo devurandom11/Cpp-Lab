@@ -4,7 +4,12 @@
 class NaturalMergeSorter {
  public:
   virtual int GetSortedRunLength(int* array, int arrayLength, int startIndex) {
-    // Your code here
+    for (int i = startIndex; i < arrayLength - 1; i++) {
+      if (array[i] > array[i + 1]) {
+        return i + 1;
+      }
+    }
+    return arrayLength - startIndex;
   }
 
   virtual void NaturalMergeSort(int* array, int arrayLength) {
