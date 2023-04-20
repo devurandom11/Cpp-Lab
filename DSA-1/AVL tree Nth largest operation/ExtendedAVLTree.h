@@ -17,59 +17,35 @@ class ExtendedAVLTree : public AVLTree {
     AVLNode* newRoot = AVLTree::Rebalance(node);
 
     // Update subtreeKeyCount for the current node
-    ExtendedAVLNode* extendedNode = (ExtendedAVLNode*)node;
+    ExtendedAVLNode* extendedNode = static_cast<ExtendedAVLNode*>(node);
     int leftCount = 0;
     int rightCount = 0;
     if (extendedNode->GetLeft()) {
-      leftCount =
-          ((ExtendedAVLNode*)extendedNode)->GetLeft()->GetSubtreeKeyCount();
+      leftCount = static_cast<ExtendedAVLNode*>(extendedNode->GetLeft())
+                      ->GetSubtreeKeyCount();
     }
 
     if (extendedNode->GetRight()) {
-      rightCount =
-          ((ExtendedAVLNode*)extendedNode)->GetRight()->GetSubtreeKeyCount();
+      rightCount = static_cast<ExtendedAVLNode*>(extendedNode->GetRight())
+                       ->GetSubtreeKeyCount();
     }
 
     extendedNode->SetSubtreeKeyCount(leftCount + rightCount + 1);
     return newRoot;
   }
 
-  virtual bool RemoveNode(BSTNode* nodeToRemove) override {
-    // Call the parent class's RemoveAVLNode method
-    bool result = AVLTree::RemoveNode(nodeToRemove);
-
-    // Update subtreeKeyCount for ancestors of the removed node
-    BSTNode* parentNode = nodeToRemove->GetParent();
-    while (parentNode) {
-      ExtendedAVLNode* extendedNode = (ExtendedAVLNode*)parentNode;
-      int leftCount = extendedNode->GetLeft() ? ((ExtendedAVLNode*)extendedNode)
-                                                    ->GetLeft()
-                                                    ->GetSubtreeKeyCount()
-                                              : 0;
-      int rightCount = extendedNode->GetRight()
-                           ? ((ExtendedAVLNode*)extendedNode)
-                                 ->GetRight()
-                                 ->GetSubtreeKeyCount()
-                           : 0;
-      extendedNode->SetSubtreeKeyCount(leftCount + rightCount + 1);
-      parentNode = parentNode->GetParent();
-    }
-
-    return result;
-  }
-
  public:
   virtual int GetNthKey(int n) override {
     // Your code here (remove placeholder line below)
     if (n < 0 || n >= ((ExtendedAVLNode*)root)->GetSubtreeKeyCount()) {
-      return -1;
+      throw std::out_of_range("n is out of range");
     }
 
     ExtendedAVLNode* currentNode = (ExtendedAVLNode*)root;
     while (currentNode) {
       int leftSubtreeKeyCount =
           currentNode->GetLeft()
-              ? ((ExtendedAVLNode*)currentNode)->GetLeft()->GetSubtreeKeyCount()
+              ? ((ExtendedAVLNode*)currentNode->GetLeft())->GetSubtreeKeyCount()
               : 0;
       if (n < leftSubtreeKeyCount) {
         currentNode = (ExtendedAVLNode*)currentNode->GetLeft();
@@ -81,6 +57,41 @@ class ExtendedAVLTree : public AVLTree {
       }
     }
     return -1;
+  }
+
+  virtual void InsertNode(BSTNode* node) override {
+    AVLTree::InsertNode(node);
+    ExtendedAVLNode* newNode = static_cast<ExtendedAVLNode*>(node);
+    while (newNode) {
+      newNode->UpdateSubtreeKeyCount();
+      newNode = static_cast<ExtendedAVLNode*>(newNode->GetParent());
+    }
+  }
+
+  virtual bool RemoveNode(BSTNode* key) override {
+    ExtendedAVLNode* node = static_cast<ExtendedAVLNode*>(key);
+    bool return_val = AVLTree::RemoveNode(key);
+    while (node) {
+      node->UpdateSubtreeKeyCount();
+      node = (ExtendedAVLNode*)node->GetParent();
+    }
+    return return_val;
+  }
+
+  virtual BSTNode* RotateLeft(BSTNode* node) override {
+    ExtendedAVLNode* newRoot = (ExtendedAVLNode*)AVLTree::RotateLeft(node);
+    newRoot->UpdateSubtreeKeyCount();
+    static_cast<ExtendedAVLNode*>(newRoot->GetParent())
+        ->UpdateSubtreeKeyCount();
+    return newRoot;
+  }
+
+  virtual BSTNode* RotateRight(BSTNode* node) override {
+    ExtendedAVLNode* newRoot = (ExtendedAVLNode*)AVLTree::RotateRight(node);
+    newRoot->UpdateSubtreeKeyCount();
+    static_cast<ExtendedAVLNode*>(newRoot->GetParent())
+        ->UpdateSubtreeKeyCount();
+    return newRoot;
   }
 };
 
