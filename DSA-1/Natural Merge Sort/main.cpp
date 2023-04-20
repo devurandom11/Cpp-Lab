@@ -57,6 +57,20 @@ int main(int argc, char* argv[]) {
   for (int i = 0; i < arr5Length; i++) {
     arr5Copy[i] = arr5[i];
   }
+  // COMMENT HERE!!!!
+  int arr6[] = {1597,     1,        1346269,  2584,      10946,      6765,
+                13,       832040,   2178309,  89,        3,          701408733,
+                233,      377,      144,      24157817,  196418,     610,
+                46368,    28657,    17711,    8,         1134903170, 9227465,
+                75025,    1,        121393,   102334155, 5702887,    433494437,
+                2,        4181,     3524578,  5,         14930352,   21,
+                987,      39088169, 514229,   317811,    55,         267914296,
+                63245986, 34,       165580141};
+  int arr6Length = sizeof(arr6) / sizeof(arr6[0]);
+  int* arr6Copy = new int[arr6Length];
+  for (int i = 0; i < arr6Length; i++) {
+    arr6Copy[i] = arr6[i];
+  }
 
   NaturalMergeSorter sorter;
   sorter.NaturalMergeSort(arr5Copy, arr5Length);
@@ -71,6 +85,18 @@ int main(int argc, char* argv[]) {
   cout << "]" << endl;
   delete[] arr5Copy;
 
+  sorter.NaturalMergeSort(arr6Copy, arr6Length);
+  cout << endl;
+  cout << (IsArraySorted(arr6Copy, arr6Length) ? "PASS" : "FAIL");
+  cout << ": NaturalMergeSort()" << endl;
+  cout << "   Array before calling NaturalMergeSort(): [";
+  WriteArray(arr6, arr6Length);
+  cout << "]" << endl;
+  cout << "   Array after calling NaturalMergeSort():  [";
+  WriteArray(arr6Copy, arr6Length);
+  cout << "]" << endl;
+
+  delete[] arr6Copy;
   return 0;
 }
 
