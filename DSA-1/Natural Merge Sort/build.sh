@@ -28,7 +28,7 @@ case "${program}" in
     ;;
     "clean")
         echo "program = clean"
-        rm -rf *.o *.out *.exe *.stackdump *.dSYM *.exe.stackdump main test selectionSort insertionSort shellSort quickSort
+        rm -rf main test selectionSort insertionSort shellSort quickSort
     ;;
     "all")
         echo "program = all"
