@@ -58,6 +58,41 @@ class ExtendedAVLTree : public AVLTree {
     }
     return -1;
   }
+
+  virtual void InsertNode(BSTNode* node) override {
+    AVLTree::InsertNode(node);
+    ExtendedAVLNode* newNode = static_cast<ExtendedAVLNode*>(node);
+    while (newNode) {
+      newNode->UpdateSubtreeKeyCount();
+      newNode = static_cast<ExtendedAVLNode*>(newNode->GetParent());
+    }
+  }
+
+  virtual bool RemoveNode(BSTNode* key) override {
+    ExtendedAVLNode* node = static_cast<ExtendedAVLNode*>(key);
+    bool return_val = AVLTree::RemoveNode(key);
+    while (node) {
+      node->UpdateSubtreeKeyCount();
+      node = (ExtendedAVLNode*)node->GetParent();
+    }
+    return return_val;
+  }
+
+  virtual BSTNode* RotateLeft(BSTNode* node) override {
+    ExtendedAVLNode* newRoot = (ExtendedAVLNode*)AVLTree::RotateLeft(node);
+    newRoot->UpdateSubtreeKeyCount();
+    static_cast<ExtendedAVLNode*>(newRoot->GetParent())
+        ->UpdateSubtreeKeyCount();
+    return newRoot;
+  }
+
+  virtual BSTNode* RotateRight(BSTNode* node) override {
+    ExtendedAVLNode* newRoot = (ExtendedAVLNode*)AVLTree::RotateRight(node);
+    newRoot->UpdateSubtreeKeyCount();
+    static_cast<ExtendedAVLNode*>(newRoot->GetParent())
+        ->UpdateSubtreeKeyCount();
+    return newRoot;
+  }
 };
 
 #endif
