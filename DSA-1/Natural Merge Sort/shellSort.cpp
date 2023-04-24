@@ -59,7 +59,6 @@ int ShellSort(int* numbers, int numbersSize, int* gapValues,
 int main() {
   // Create an array of numbers to sort
   int numbers[] = {55, 99, 87, 54, 31, 17, 28, 18};
-  int numbersCopy[] = {55, 99, 87, 54, 31, 17, 28, 18};
   int numbersSize = sizeof(numbers) / sizeof(numbers[0]);
 
   // Display the contents of the array
@@ -73,12 +72,5 @@ int main() {
 
   // Display sorted array and the total number of swaps
   cout << "SORTED:   " << ArrayToString(numbers, numbersSize) << endl;
-  cout << "Total swaps: " << totalSwaps << endl;
-
-  // Sort the same array with insertion sort
-  cout << endl << "---- Regular insertion sort ----" << endl;
-  cout << "UNSORTED: " << ArrayToString(numbersCopy, numbersSize) << endl;
-  totalSwaps = InsertionSortInterleaved(numbersCopy, numbersSize, 0, 1);
-  cout << "SORTED:   " << ArrayToString(numbersCopy, numbersSize) << endl;
   cout << "Total swaps: " << totalSwaps << endl;
 }
