@@ -4,11 +4,7 @@ program=$1
 case "${program}" in
     "main")
         echo "item = main"
-        clang++ -Og -g -Wall -Werror -pedantic main.cpp -o main && chmod +x ./main && ./main
-    ;;
-    "test")
-        echo "program = test"
-        clang++ -Og -g -Wall -Werror -pedantic test.cpp -o test && chmod +x ./test && ./test
+        clang++ -Og -g -Wall -Werror -pedantic ./Lab/main.cpp -o ./Lab/main && chmod +x ./Lab/main && ./Lab/main
     ;;
     "selectionSort")
         echo "program = selectionSort"
@@ -28,17 +24,16 @@ case "${program}" in
     ;;
     "clean")
         echo "program = clean"
-        rm -rf main test selectionSort insertionSort shellSort quickSort
+        rm -rf main selectionSort insertionSort shellSort quickSort
     ;;
     "all")
         echo "program = all"
-        clang++ -Og -g -Wall -Werror -pedantic main.cpp -o main && chmod +x ./main
-        clang++ -Og -g -Wall -Werror -pedantic test.cpp -o test && chmod +x ./test
+        clang++ -Og -g -Wall -Werror -pedantic ./Lab/main.cpp -o ./Lab/main && chmod +x ./Lab/main
         clang++ -Og -g -Wall -Werror -pedantic selectionSort.cpp -o selectionSort && chmod +x ./selectionSort
         clang++ -Og -g -Wall -Werror -pedantic insertionSort.cpp -o insertionSort && chmod +x ./insertionSort
         clang++ -Og -g -Wall -Werror -pedantic shellSort.cpp -o shellSort && chmod +x ./shellSort
         clang++ -Og -g -Wall -Werror -pedantic quickSort.cpp -o quickSort && chmod +x ./quickSort
-        executables=(test selectionSort insertionSort shellSort quickSort main)
+        executables=(selectionSort insertionSort shellSort quickSort ./Lab/main)
         for executable in "${executables[@]}"
         do
             ./"$executable"
@@ -47,8 +42,6 @@ case "${program}" in
     ;;
     *)
         echo "Incorrect Usage:"
-        echo "Usage: ./build.sh [all|main|test|selectionSort|insertionSort|clean]"
+        echo "Usage: ./build.sh [all|main|selectionSort|insertionSort|clean]"
     ;;
 esac
-
-
