@@ -4,46 +4,50 @@
 class NaturalMergeSorter {
  public:
   virtual int GetSortedRunLength(int* array, int arrayLength, int startIndex) {
-    if (startIndex >= arrayLength - 1) {
+    if (startIndex > arrayLength - 1) {
       return 0;
     }
-    int count = 1;
-    for (int i = startIndex; i < arrayLength - 1; i++) {
-      if (array[i] > array[i + 1]) {
-        return count;
+    int runLength = 1;
+    for (int i = startIndex + 1; i < arrayLength; i++) {
+      if (array[i] >= array[i - 1]) {
+        runLength++;
+      } else {
+        break;
       }
-      count++;
     }
-    return arrayLength - startIndex;
+    return runLength;
   }
 
   virtual void NaturalMergeSort(int* array, int arrayLength) {
-    while (true) {
-      int i = 0;
-
-      while (i < arrayLength) {
-        int leftRunLength = GetSortedRunLength(array, arrayLength, i);
-
-        if (leftRunLength == arrayLength) {
-          return;
-        }
-
-        int leftLastIndex = i + leftRunLength - 1;
-
-        if (leftLastIndex + 1 < arrayLength) {
-          int rightRunLength =
-              GetSortedRunLength(array, arrayLength, leftLastIndex + 1);
-          int rightLastIndex = leftLastIndex + rightRunLength + 1;
-
-          Merge(array, i, leftLastIndex, rightLastIndex);
-        } else {
-          i = 0;
-          continue;
-        }
-
-        i = leftLastIndex + leftRunLength + 1;
-      }
+    if (arrayLength <= 1) {
+      return;
     }
+
+    int startIndex;
+    bool hasMerged;
+    do {
+      startIndex = 0;
+      hasMerged = false;
+      while (startIndex < arrayLength) {
+        int leftFirst = startIndex;
+        int leftLast =
+            leftFirst + GetSortedRunLength(array, arrayLength, leftFirst) - 1;
+
+        // Check if there's a right run to merge
+        if (leftLast < arrayLength - 1) {
+          int rightFirst = leftLast + 1;
+          int rightLast = rightFirst +
+                          GetSortedRunLength(array, arrayLength, rightFirst) -
+                          1;
+
+          Merge(array, leftFirst, leftLast, rightLast);
+          startIndex = rightLast + 1;
+          hasMerged = true;
+        } else {
+          startIndex = arrayLength;  // No more runs to merge
+        }
+      }
+    } while (hasMerged);
   }
 
   virtual void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
