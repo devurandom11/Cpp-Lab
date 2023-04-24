@@ -40,7 +40,6 @@ void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
 
 void MergeSort(int* numbers, int startIdx, int endIdx) {
   std::cout << "Implementing";
-  ;
 }
 
 int main() {

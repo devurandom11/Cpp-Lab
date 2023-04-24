@@ -22,9 +22,17 @@ case "${program}" in
         echo "program = quickSort"
         clang++ -Og -g -Wall -Werror -pedantic quickSort.cpp -o quickSort && chmod +x ./quickSort && ./quickSort
     ;;
+    "mergeSort")
+        echo "program = mergeSort"
+        clang++ -Og -g -Wall -Werror -pedantic mergeSort.cpp -o mergeSort && chmod +x ./mergeSort && ./mergeSort
+    ;;
+    "radixSort")
+        echo "program = radixSort"
+        clang++ -Og -g -Wall -Werror -pedantic radixSort.cpp -o radixSort && chmod +x ./radixSort && ./radixSort
+    ;;
     "clean")
         echo "program = clean"
-        rm -rf main selectionSort insertionSort shellSort quickSort
+        rm -rf main selectionSort insertionSort shellSort quickSort mergeSort radixSort ./Lab/main
     ;;
     "all")
         echo "program = all"
@@ -33,7 +41,9 @@ case "${program}" in
         clang++ -Og -g -Wall -Werror -pedantic insertionSort.cpp -o insertionSort && chmod +x ./insertionSort
         clang++ -Og -g -Wall -Werror -pedantic shellSort.cpp -o shellSort && chmod +x ./shellSort
         clang++ -Og -g -Wall -Werror -pedantic quickSort.cpp -o quickSort && chmod +x ./quickSort
-        executables=(selectionSort insertionSort shellSort quickSort ./Lab/main)
+        clang++ -Og -g -Wall -Werror -pedantic mergeSort.cpp -o mergeSort && chmod +x ./mergeSort
+        clang++ -Og -g -Wall -Werror -pedantic radixSort.cpp -o radixSort && chmod +x ./radixSort
+        executables=(selectionSort insertionSort shellSort quickSort mergeSort radixSort ./Lab/main)
         for executable in "${executables[@]}"
         do
             ./"$executable"
