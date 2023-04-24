@@ -19,7 +19,7 @@ void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
     mergePos++;
   }
 
-  while (lefPos <= leftLast) {
+  while (leftPos <= leftLast) {
     mergedNumbers[mergePos] = numbers[leftPos];
     leftPos++;
     mergePos++;
