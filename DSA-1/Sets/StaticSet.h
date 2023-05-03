@@ -65,7 +65,11 @@ class StaticSet {
   StaticSet<T> Filter(std::function<bool(const T&)> predicate) const {
     // Your code here (remove placeholder line below)
     StaticSet<T> copy;
-
+    for (const T& item : set) {
+      if (predicate(item)) {
+        copy.set.insert(item);
+      }
+    }
     return StaticSet<T>(copy.set);
   }
 
