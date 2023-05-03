@@ -46,8 +46,6 @@ class StaticSet {
     output << suffix;
   }
 
-  // Returns a StaticSet<T> containing each element from this set that is not
-  // in otherSet.
   StaticSet<T> Difference(const StaticSet& otherSet) const {
     StaticSet<T> copy;
     for (const T& item : set) {
@@ -55,46 +53,43 @@ class StaticSet {
         copy.set.insert(item);
       }
     }
-    return StaticSet<T>(copy.set);
+    return copy;
   }
 
-  // Returns a StaticSet<T> containing each element from this set that
-  // satisfies the predicate.
-  // - If predicate(item) returns true, item satisfies the predicate.
-  // - If predicate(item) returns false, item does not satisfy the predicate.
   StaticSet<T> Filter(std::function<bool(const T&)> predicate) const {
-    // Your code here (remove placeholder line below)
     StaticSet<T> copy;
     for (const T& item : set) {
       if (predicate(item)) {
         copy.set.insert(item);
       }
     }
-    return StaticSet<T>(copy.set);
+    return copy;
   }
 
-  // Returns a StaticSet<T> containing each element from this set that is also
-  // in otherSet.
   StaticSet<T> Intersection(const StaticSet& otherSet) const {
-    // Your code here (remove placeholder line below)
     StaticSet<T> copy;
-    return StaticSet<T>(copy.set);
+    for (const T& item : set) {
+      if (otherSet.Contains(item)) {
+        copy.set.insert(item);
+      }
+    }
+    return copy;
   }
-
-  // Calls mapFunction(item) for each item in this set and adds the returned
-  // item to a StaticSet<U>. After mapFunction has been called for each item
-  // in this set, the StaticSet<U> object is returned.
   template <typename U>
   StaticSet<U> Map(std::function<U(const T&)> mapFunction) const {
-    // Your code here (remove placeholder line below)
-    return StaticSet<U>();
+    std::unordered_set<U> mapped_set;
+    for (const auto& item : set) {
+      mapped_set.insert(mapFunction(item));
+    }
+    return StaticSet<U>(mapped_set);
   }
 
-  // Returns a StaticSet<T> containing every element from this set and every
-  // element from otherSet.
   StaticSet<T> Union(const StaticSet& otherSet) const {
-    // Your code here (remove placeholder line below)
-    return StaticSet<T>();
+    StaticSet<T> combined(set);
+    for (const auto& item : otherSet.set) {
+      combined.set.insert(item);
+    }
+    return combined;
   }
 };
 
