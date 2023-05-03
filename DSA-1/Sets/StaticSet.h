@@ -49,8 +49,13 @@ class StaticSet {
   // Returns a StaticSet<T> containing each element from this set that is not
   // in otherSet.
   StaticSet<T> Difference(const StaticSet& otherSet) const {
-    // Your code here (remove placeholder line below)
-    return StaticSet<T>();
+    StaticSet<T> copy;
+    for (const T& item : set) {
+      if (!otherSet.Contains(item)) {
+        copy.set.insert(item);
+      }
+    }
+    return StaticSet<T>(copy.set);
   }
 
   // Returns a StaticSet<T> containing each element from this set that
@@ -59,14 +64,17 @@ class StaticSet {
   // - If predicate(item) returns false, item does not satisfy the predicate.
   StaticSet<T> Filter(std::function<bool(const T&)> predicate) const {
     // Your code here (remove placeholder line below)
-    return StaticSet<T>();
+    StaticSet<T> copy;
+
+    return StaticSet<T>(copy.set);
   }
 
   // Returns a StaticSet<T> containing each element from this set that is also
   // in otherSet.
   StaticSet<T> Intersection(const StaticSet& otherSet) const {
     // Your code here (remove placeholder line below)
-    return StaticSet<T>();
+    StaticSet<T> copy;
+    return StaticSet<T>(copy.set);
   }
 
   // Calls mapFunction(item) for each item in this set and adds the returned
