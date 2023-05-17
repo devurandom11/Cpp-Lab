@@ -95,5 +95,6 @@
     "functional": "cpp",
     "unordered_set": "cpp",
     "xhash": "cpp"
-  }
+  },
+  "sarif-viewer.connectToGithubCodeScanning": "on"
 }
