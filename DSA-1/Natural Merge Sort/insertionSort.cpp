@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-void InsertionSort(int* numbers, int numbersSize) {
+void InsertionSort(int *numbers, int numbersSize) {
   for (int i = 1; i < numbersSize; i++) {
     int j = i;
     while (j > 0 && numbers[j] < numbers[j - 1]) {
@@ -15,7 +15,7 @@ void InsertionSort(int* numbers, int numbersSize) {
   }
 }
 
-string ArrayToString(int* array, int arraySize) {
+string ArrayToString(int *array, int arraySize) {
   // Special case for empty array
   if (0 == arraySize) {
     return string("[]");

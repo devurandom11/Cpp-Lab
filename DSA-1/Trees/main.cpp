@@ -1,24 +1,22 @@
 #include <iostream>
-#include <string>
-#include <vector>
 
 // Binary tree implementation using structs only
 
 struct Node {
   int data;
-  Node* left;
-  Node* right;
+  Node *left;
+  Node *right;
 };
 
-Node* createNode(int data) {
-  Node* newNode = new Node();
+Node *createNode(int data) {
+  Node *newNode = new Node();
   newNode->data = data;
   newNode->left = nullptr;
   newNode->right = nullptr;
   return newNode;
 }
 
-void insertNode(Node* root, int data) {
+void insertNode(Node *root, int data) {
   if (data < root->data) {
     if (root->left == nullptr) {
       root->left = createNode(data);
@@ -34,7 +32,7 @@ void insertNode(Node* root, int data) {
   }
 }
 
-void printTree(Node* root) {
+void printTree(Node *root) {
   if (root == nullptr) {
     return;
   }
@@ -45,10 +43,10 @@ void printTree(Node* root) {
 
 // Binary search tree implementation using classes
 class myNode {
- public:
+public:
   int data;
-  myNode* left;
-  myNode* right;
+  myNode *left;
+  myNode *right;
   myNode(int data) {
     this->data = data;
     left = nullptr;
@@ -57,8 +55,8 @@ class myNode {
 };
 
 class myTree {
- public:
-  myNode* root;
+public:
+  myNode *root;
   myTree() { root = nullptr; }
   void insert(int data) {
     if (root == nullptr) {
@@ -67,7 +65,7 @@ class myTree {
       insertNode(root, data);
     }
   }
-  void insertNode(myNode* root, int data) {
+  void insertNode(myNode *root, int data) {
     if (data < root->data) {
       if (root->left == nullptr) {
         root->left = new myNode(data);
@@ -82,7 +80,7 @@ class myTree {
       }
     }
   }
-  void printTree(myNode* root) {
+  void printTree(myNode *root) {
     if (root == nullptr) {
       return;
     }
@@ -94,7 +92,7 @@ class myTree {
 
 int main() {
   // Struct implementation
-  Node* root = createNode(5);
+  Node *root = createNode(5);
   insertNode(root, 3);
   insertNode(root, 7);
   insertNode(root, 1);

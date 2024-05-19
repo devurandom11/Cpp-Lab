@@ -5,10 +5,10 @@
 #include "RunLengthTestCase.h"
 using namespace std;
 
-bool IsArraySorted(int* arr, int arrSize);
-void WriteArray(int* array, int arrayLength);
+bool IsArraySorted(int *arr, int arrSize);
+void WriteArray(int *array, int arrayLength);
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   // Test case array: A completely sorted array
   int arr1[] = {15, 23, 23, 23, 31, 64, 77, 87, 88, 91};
   int arr1Length = sizeof(arr1) / sizeof(arr1[0]);
@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
   // Execute each test case
   int testCasesLength = sizeof(testCases) / sizeof(testCases[0]);
   for (int i = 0; i < testCasesLength; i++) {
-    RunLengthTestCase& testCase = testCases[i];
+    RunLengthTestCase &testCase = testCases[i];
 
     // Execute the test case, using std::cout to write messages
     testCase.Execute(std::cout);
@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
   // Test case array for sorting
   int arr5[] = {92, 71, 18, 26, 54, 73, 89, 10, 39, 99, 64, 22};
   int arr5Length = sizeof(arr5) / sizeof(arr5[0]);
-  int* arr5Copy = new int[arr5Length];
+  int *arr5Copy = new int[arr5Length];
   for (int i = 0; i < arr5Length; i++) {
     arr5Copy[i] = arr5[i];
   }
@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
                 987,      39088169, 514229,   317811,    55,         267914296,
                 63245986, 34,       165580141};
   int arr6Length = sizeof(arr6) / sizeof(arr6[0]);
-  int* arr6Copy = new int[arr6Length];
+  int *arr6Copy = new int[arr6Length];
   for (int i = 0; i < arr6Length; i++) {
     arr6Copy[i] = arr6[i];
   }
@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
   return 0;
 }
 
-bool IsArraySorted(int* arr, int arrSize) {
+bool IsArraySorted(int *arr, int arrSize) {
   for (int i = 1; i < arrSize; i++) {
     if (arr[i] < arr[i - 1]) {
       return false;
@@ -109,7 +109,7 @@ bool IsArraySorted(int* arr, int arrSize) {
   return true;
 }
 
-void WriteArray(int* array, int arrayLength) {
+void WriteArray(int *array, int arrayLength) {
   // Output occurs only if at least one array element exists
   if (arrayLength > 0) {
     // Write the first element without a comma

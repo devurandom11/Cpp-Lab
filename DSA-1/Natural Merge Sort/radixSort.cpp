@@ -18,7 +18,7 @@ int RadixGetLength(int value) {
 }
 
 // Returns the maximum length, in number of digits, out of all array elements
-int RadixGetMaxLength(int* numbers, int numbersSize) {
+int RadixGetMaxLength(int *numbers, int numbersSize) {
   int maxDigits = 0;
   for (int i = 0; i < numbersSize; i++) {
     int digitCount = RadixGetLength(numbers[i]);
@@ -29,10 +29,10 @@ int RadixGetMaxLength(int* numbers, int numbersSize) {
   return maxDigits;
 }
 
-void RadixSort(int* numbers, int numbersSize) {
-  vector<vector<int>*> buckets;
+void RadixSort(int *numbers, int numbersSize) {
+  vector<vector<int> *> buckets;
   for (int i = 0; i < 10; i++) {
-    vector<int>* bucket = new vector<int>();
+    vector<int> *bucket = new vector<int>();
     buckets.push_back(bucket);
   }
 
@@ -53,7 +53,7 @@ void RadixSort(int* numbers, int numbersSize) {
     // Copy buckets back into numbers array
     copyBackIndex = 0;
     for (int i = 0; i < 10; i++) {
-      vector<int>& bucket = *buckets[i];
+      vector<int> &bucket = *buckets[i];
       for (int j = 0; j < bucket.size(); j++) {
         numbers[copyBackIndex] = bucket[j];
         copyBackIndex++;
@@ -92,7 +92,7 @@ void RadixSort(int* numbers, int numbersSize) {
   }
 }
 
-string ArrayToString(int* array, int arraySize) {
+string ArrayToString(int *array, int arraySize) {
   // Special case for empty array
   if (0 == arraySize) {
     return string("[]");

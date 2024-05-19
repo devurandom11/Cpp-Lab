@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-int Partition(int* numbers, int startIndex, int endIndex) {
+int Partition(int *numbers, int startIndex, int endIndex) {
   // Select the middle value as the pivot.
   int midpoint = startIndex + (endIndex - startIndex) / 2;
   int pivot = numbers[midpoint];
@@ -42,7 +42,7 @@ int Partition(int* numbers, int startIndex, int endIndex) {
   return high;
 }
 
-void Quicksort(int* numbers, int startIndex, int endIndex) {
+void Quicksort(int *numbers, int startIndex, int endIndex) {
   // Only sort if at least 2 elements exist
   if (endIndex <= startIndex) {
     return;
@@ -58,7 +58,7 @@ void Quicksort(int* numbers, int startIndex, int endIndex) {
   Quicksort(numbers, high + 1, endIndex);
 }
 
-string ArrayToString(int* array, int arraySize) {
+string ArrayToString(int *array, int arraySize) {
   // Special case for empty array
   if (0 == arraySize) {
     return string("[]");

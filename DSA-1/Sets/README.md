@@ -15,11 +15,11 @@ are assigned at construction time and must not change after.
 
 Constructors and some additional member functions are already implemented:
 
-* Contains(const T& item) uses the unordered_set's count()
+- Contains(const T& item) uses the unordered_set's count()
   function to determine if the set contains the item. If count() returns
   1, the item is in the set and Contains() returns true. Otherwise the
   item is not in the set and Contains() returns false.
-* GetSize() uses the unordered_set's size() function to determine the
+- GetSize() uses the unordered_set's size() function to determine the
   number of elements in the set. GetSize() returns the set's size as an
   integer.
 
@@ -27,7 +27,7 @@ Constructors and some additional member functions are already implemented:
 
 Implement the StaticSet class's Union(), Intersection(),
 Difference(), Filter(), and Map() member functions. Each must not change
- the StaticSet itself, but rather build and return a new StaticSet.
+the StaticSet itself, but rather build and return a new StaticSet.
 
 # Step 3: Test in develop mode, then submit
 

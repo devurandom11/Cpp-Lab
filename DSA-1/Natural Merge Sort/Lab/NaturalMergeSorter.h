@@ -2,8 +2,8 @@
 #define NATURALMERGESORTER_H
 
 class NaturalMergeSorter {
- public:
-  virtual int GetSortedRunLength(int* array, int arrayLength, int startIndex) {
+public:
+  virtual int GetSortedRunLength(int *array, int arrayLength, int startIndex) {
     if (startIndex > arrayLength - 1) {
       return 0;
     }
@@ -18,7 +18,7 @@ class NaturalMergeSorter {
     return runLength;
   }
 
-  virtual void NaturalMergeSort(int* array, int arrayLength) {
+  virtual void NaturalMergeSort(int *array, int arrayLength) {
     if (arrayLength <= 1) {
       return;
     }
@@ -44,15 +44,15 @@ class NaturalMergeSorter {
           startIndex = rightLast + 1;
           hasMerged = true;
         } else {
-          startIndex = arrayLength;  // No more runs to merge
+          startIndex = arrayLength; // No more runs to merge
         }
       }
     } while (hasMerged);
   }
 
-  virtual void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
+  virtual void Merge(int *numbers, int leftFirst, int leftLast, int rightLast) {
     int mergedSize = rightLast - leftFirst + 1;
-    int* mergedNumbers = new int[mergedSize];
+    int *mergedNumbers = new int[mergedSize];
     int mergePos = 0;
     int leftPos = leftFirst;
     int rightPos = leftLast + 1;

@@ -10,10 +10,10 @@
 #include "StaticSet.h"
 
 class StaticSetTestCase {
- public:
+public:
   template <typename T>
-  static double CompareSets(std::ostream& testFeedback, StaticSet<T>& actual,
-                            std::unordered_set<T>& expected, std::string title,
+  static double CompareSets(std::ostream &testFeedback, StaticSet<T> &actual,
+                            std::unordered_set<T> &expected, std::string title,
                             double points) {
     using namespace std;
     bool pass = true;
@@ -23,7 +23,7 @@ class StaticSetTestCase {
       pass = false;
     } else {
       // Expected and actual have equal sizes, so compare contents
-      for (const T& item : expected) {
+      for (const T &item : expected) {
         if (!actual.Contains(item)) {
           pass = false;
         }
@@ -41,14 +41,14 @@ class StaticSetTestCase {
   }
 
   template <typename ContainerType, typename ItemType>
-  static void Print(std::ostream& output, const ContainerType& iterable,
+  static void Print(std::ostream &output, const ContainerType &iterable,
                     std::string separator = ", ", std::string prefix = "",
                     std::string suffix = "") {
     // Print the prefix first
     output << prefix;
 
     bool firstItem = true;
-    for (const ItemType& item : iterable) {
+    for (const ItemType &item : iterable) {
       if (firstItem) {
         // Print first item without separator
         output << item;
@@ -63,14 +63,13 @@ class StaticSetTestCase {
     output << suffix;
   }
 
-  virtual int Execute(std::ostream& testFeedback) = 0;
+  virtual int Execute(std::ostream &testFeedback) = 0;
 };
 
 // BinaryOpsTestCase represents an executable test case for the StaticSet's
 // Union(), Intersection(), and Difference() member functions
-template <typename T>
-class BinaryOpsTestCase : public StaticSetTestCase {
- private:
+template <typename T> class BinaryOpsTestCase : public StaticSetTestCase {
+private:
   std::unordered_set<T> setA;
   std::unordered_set<T> setB;
   std::unordered_set<T> expectedUnion;
@@ -78,13 +77,13 @@ class BinaryOpsTestCase : public StaticSetTestCase {
   std::unordered_set<T> expectedAMinusB;
   std::unordered_set<T> expectedBMinusA;
 
- public:
-  BinaryOpsTestCase(const std::unordered_set<T>& setA,
-                    const std::unordered_set<T>& setB,
-                    const std::unordered_set<T>& expectedUnion,
-                    const std::unordered_set<T>& expectedIntersection,
-                    const std::unordered_set<T>& expectedAMinusB,
-                    const std::unordered_set<T>& expectedBMinusA) {
+public:
+  BinaryOpsTestCase(const std::unordered_set<T> &setA,
+                    const std::unordered_set<T> &setB,
+                    const std::unordered_set<T> &expectedUnion,
+                    const std::unordered_set<T> &expectedIntersection,
+                    const std::unordered_set<T> &expectedAMinusB,
+                    const std::unordered_set<T> &expectedBMinusA) {
     this->setA = setA;
     this->setB = setB;
     this->expectedUnion = expectedUnion;
@@ -93,7 +92,7 @@ class BinaryOpsTestCase : public StaticSetTestCase {
     this->expectedBMinusA = expectedBMinusA;
   }
 
-  virtual int Execute(std::ostream& testFeedback) override {
+  virtual int Execute(std::ostream &testFeedback) override {
     using namespace std;
 
     // Print sets A and B first
@@ -111,12 +110,12 @@ class BinaryOpsTestCase : public StaticSetTestCase {
     StaticSet<T> actualBMinusA = staticSetB.Difference(staticSetA);
 
     // Verify that performing operations didn't change either StaticSet's size
-    vector<tuple<StaticSet<T>*, unordered_set<T>*, string>> sizeChecks = {
+    vector<tuple<StaticSet<T> *, unordered_set<T> *, string>> sizeChecks = {
         make_tuple(&staticSetA, &setA, "A"),
         make_tuple(&staticSetB, &setB, "B")};
-    for (auto& sizeCheckTuple : sizeChecks) {
-      StaticSet<T>* staticSet = std::get<0>(sizeCheckTuple);
-      unordered_set<T>* unorderedSet = std::get<1>(sizeCheckTuple);
+    for (auto &sizeCheckTuple : sizeChecks) {
+      StaticSet<T> *staticSet = std::get<0>(sizeCheckTuple);
+      unordered_set<T> *unorderedSet = std::get<1>(sizeCheckTuple);
       string staticSetName = std::get<2>(sizeCheckTuple);
       if (staticSet->GetSize() != (int)unorderedSet->size()) {
         testFeedback << "FAIL: Creating the union/intersection/difference ";
@@ -148,19 +147,19 @@ class BinaryOpsTestCase : public StaticSetTestCase {
 // Filter() and Map() member functions
 template <typename T, typename MappedItemType>
 class UnaryOpsTestCase : public StaticSetTestCase {
- private:
+private:
   std::unordered_set<T> sourceSet;
-  std::function<bool(const T&)> filterPredicate;
-  std::function<MappedItemType(const T&)> mapFunction;
+  std::function<bool(const T &)> filterPredicate;
+  std::function<MappedItemType(const T &)> mapFunction;
   std::unordered_set<T> expectedFiltered;
   std::unordered_set<MappedItemType> expectedMapped;
 
- public:
-  UnaryOpsTestCase(const std::unordered_set<T>& sourceSet,
-                   std::function<bool(const T&)> filterPredicate,
-                   std::function<MappedItemType(const T&)> mapFunction,
-                   const std::unordered_set<T>& expectedFiltered,
-                   const std::unordered_set<MappedItemType>& expectedMapped) {
+public:
+  UnaryOpsTestCase(const std::unordered_set<T> &sourceSet,
+                   std::function<bool(const T &)> filterPredicate,
+                   std::function<MappedItemType(const T &)> mapFunction,
+                   const std::unordered_set<T> &expectedFiltered,
+                   const std::unordered_set<MappedItemType> &expectedMapped) {
     this->sourceSet = sourceSet;
     this->filterPredicate = filterPredicate;
     this->mapFunction = mapFunction;
@@ -168,7 +167,7 @@ class UnaryOpsTestCase : public StaticSetTestCase {
     this->expectedMapped = expectedMapped;
   }
 
-  virtual int Execute(std::ostream& testFeedback) override {
+  virtual int Execute(std::ostream &testFeedback) override {
     using namespace std;
 
     // Print the source set first

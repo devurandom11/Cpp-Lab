@@ -1,8 +1,8 @@
 #include <iostream>
 
-void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
+void Merge(int *numbers, int leftFirst, int leftLast, int rightLast) {
   int mergedSize = rightLast - leftFirst + 1;
-  int* mergedNumbers = new int[mergedSize];
+  int *mergedNumbers = new int[mergedSize];
 
   int mergePos = 0;
   int leftPos = leftFirst;
@@ -38,7 +38,7 @@ void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
   delete[] mergedNumbers;
 }
 
-void MergeSort(int* numbers, int startIdx, int endIdx) {
+void MergeSort(int *numbers, int startIdx, int endIdx) {
   std::cout << "Implementing";
 }
 

@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-int SelectionSort(int* numbers, int numbersSize) {
+int SelectionSort(int *numbers, int numbersSize) {
   // A variable to hold the number of item comparisons
   int comparisons = 0;
 
@@ -25,7 +25,7 @@ int SelectionSort(int* numbers, int numbersSize) {
   return comparisons;
 }
 
-string ArrayToString(int* array, int arraySize) {
+string ArrayToString(int *array, int arraySize) {
   // Special case for empty array
   if (0 == arraySize) {
     return string("[]");

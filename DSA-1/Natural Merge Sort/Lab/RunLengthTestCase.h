@@ -8,13 +8,13 @@
 // RunLengthTestCase represents a test case for the NaturalMergeSorter class's
 // GetSortedRunLength() function.
 class RunLengthTestCase {
- public:
-  int* array;
+public:
+  int *array;
   int arrayLength;
   int startIndex;
   int expectedReturnValue;
 
-  RunLengthTestCase(int* array, int len, int start, int expectedRet) {
+  RunLengthTestCase(int *array, int len, int start, int expectedRet) {
     this->array = array;
     arrayLength = len;
     startIndex = start;
@@ -24,7 +24,7 @@ class RunLengthTestCase {
   // Executes the test case. If the test case passes, a message that starts
   // with "PASS" is printed and true is returned. Otherwise a message that
   // starts with "FAIL" is printed and false is returned.
-  bool Execute(std::ostream& testFeedback) {
+  bool Execute(std::ostream &testFeedback) {
     using namespace std;
 
     // Create a NaturalMergeSorter instance
@@ -53,7 +53,7 @@ class RunLengthTestCase {
   }
 
   // Writes comma-separated elements to the output stream
-  void WriteArray(std::ostream& output) const {
+  void WriteArray(std::ostream &output) const {
     // Output occurs only if at least one array element exists
     if (arrayLength > 0) {
       // Write the first element without a comma

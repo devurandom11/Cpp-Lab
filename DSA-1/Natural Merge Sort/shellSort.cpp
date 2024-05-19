@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-string ArrayToString(int* array, int arraySize) {
+string ArrayToString(int *array, int arraySize) {
   // Special case for empty array
   if (0 == arraySize) {
     return string("[]");
@@ -22,7 +22,7 @@ string ArrayToString(int* array, int arraySize) {
   return result;
 }
 
-int InsertionSortInterleaved(int* numbers, int numbersSize, int startIndex,
+int InsertionSortInterleaved(int *numbers, int numbersSize, int startIndex,
                              int gap) {
   int swaps = 0;
   for (int i = startIndex + gap; i < numbersSize; i += gap) {
@@ -39,7 +39,7 @@ int InsertionSortInterleaved(int* numbers, int numbersSize, int startIndex,
   return swaps;
 }
 
-int ShellSort(int* numbers, int numbersSize, int* gapValues,
+int ShellSort(int *numbers, int numbersSize, int *gapValues,
               int gapValuesSize) {
   int totalSwaps = 0;
   for (int g = 0; g < gapValuesSize; g++) {
