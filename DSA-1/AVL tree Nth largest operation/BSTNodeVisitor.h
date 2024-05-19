@@ -4,9 +4,9 @@
 #include "BSTNode.h"
 
 class BSTNodeVisitor {
- public:
+public:
   // Returns true to continue traversal, false to terminate
-  virtual bool Visit(BSTNode* node) = 0;
+  virtual bool Visit(BSTNode *node) = 0;
 };
 
 #endif

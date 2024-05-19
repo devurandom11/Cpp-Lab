@@ -2,7 +2,7 @@
 #define UNDOCOMMAND_H
 
 class UndoCommand {
- public:
+public:
   virtual ~UndoCommand(){};
   virtual void Execute() = 0;
 };

@@ -5,14 +5,12 @@
 
 #include "HashTable.h"
 
-
-template <typename K, typename V>
-struct ChainingHashTableItem {
+template <typename K, typename V> struct ChainingHashTableItem {
   K key;
   V value;
-  ChainingHashTableItem<K, V>* next;
+  ChainingHashTableItem<K, V> *next;
 
-  ChainingHashTableItem(const K& itemKey, const V& itemValue)
+  ChainingHashTableItem(const K &itemKey, const V &itemValue)
       : key(itemKey), value(itemValue) {
     next = nullptr;
   }
@@ -20,10 +18,10 @@ struct ChainingHashTableItem {
 
 template <typename K, typename V>
 class ChainingHashTable : public HashTable<K, V> {
- private:
-  std::vector<ChainingHashTableItem<K, V>*> table;
+private:
+  std::vector<ChainingHashTableItem<K, V> *> table;
 
- public:
+public:
   ChainingHashTable(int initialCapacity = 11) {
     table.resize(initialCapacity, nullptr);
   }
@@ -31,9 +29,9 @@ class ChainingHashTable : public HashTable<K, V> {
   virtual ~ChainingHashTable() {
     // Delete each ChainingHashTableItem in the table
     for (int i = 0; i < table.size(); i++) {
-      ChainingHashTableItem<K, V>* item = table[i];
+      ChainingHashTableItem<K, V> *item = table[i];
       while (item) {
-        ChainingHashTableItem<K, V>* itemToDelete = item;
+        ChainingHashTableItem<K, V> *itemToDelete = item;
         item = item->next;
         delete itemToDelete;
       }
@@ -43,14 +41,14 @@ class ChainingHashTable : public HashTable<K, V> {
   // Inserts the specified key/value pair. If the key already exists, the
   // corresponding value is updated. If inserted or updated, true is returned.
   // If not inserted, then false is returned.
-  bool Insert(const K& key, const V& value) override {
+  bool Insert(const K &key, const V &value) override {
     // Hash the key to get the bucket index
     int bucketIndex = this->Hash(key) % table.size();
 
     // Traverse the linked list, searching for the key. If the key exists in
     // an item, the value is replaced. Otherwise a new item is appended.
-    ChainingHashTableItem<K, V>* item = table[bucketIndex];
-    ChainingHashTableItem<K, V>* previous = nullptr;
+    ChainingHashTableItem<K, V> *item = table[bucketIndex];
+    ChainingHashTableItem<K, V> *previous = nullptr;
     while (item) {
       if (key == item->key) {
         item->value = value;
@@ -72,13 +70,13 @@ class ChainingHashTable : public HashTable<K, V> {
 
   // Searches for the specified key. If found, the key/value pair is removed
   // from the hash table and true is returned. If not found, false is returned.
-  bool Remove(const K& key) override {
+  bool Remove(const K &key) override {
     // Hash the key to get the bucket index
     int bucketIndex = this->Hash(key) % table.size();
 
     // Search the bucket's linked list for the key
-    ChainingHashTableItem<K, V>* item = table[bucketIndex];
-    ChainingHashTableItem<K, V>* previous = nullptr;
+    ChainingHashTableItem<K, V> *item = table[bucketIndex];
+    ChainingHashTableItem<K, V> *previous = nullptr;
     while (item) {
       if (key == item->key) {
         if (previous == nullptr) {
@@ -95,17 +93,17 @@ class ChainingHashTable : public HashTable<K, V> {
       item = item->next;
     }
 
-    return false;  // key not found
+    return false; // key not found
   }
 
   // Searches for the key, returning the corresponding value if found, null if
   // not found.
-  V* Search(const K& key) const override {
+  V *Search(const K &key) const override {
     // Hash the key to get the bucket index
     int bucketIndex = this->Hash(key) % table.size();
 
     // Search the bucket's linked list for the key
-    ChainingHashTableItem<K, V>* item = table[bucketIndex];
+    ChainingHashTableItem<K, V> *item = table[bucketIndex];
     while (item) {
       if (key == item->key) {
         return &item->value;
@@ -113,17 +111,17 @@ class ChainingHashTable : public HashTable<K, V> {
       item = item->next;
     }
 
-    return nullptr;  // key not found
+    return nullptr; // key not found
   }
 
-  void PrintTable(std::ostream& printStream) const override {
+  void PrintTable(std::ostream &printStream) const override {
     for (int i = 0; i < table.size(); i++) {
       printStream << i << ": ";
 
       if (table[i] == nullptr) {
         printStream << "(empty)" << std::endl;
       } else {
-        ChainingHashTableItem<K, V>* item = table[i];
+        ChainingHashTableItem<K, V> *item = table[i];
         while (item) {
           printStream << item->key << ", " << item->value << " --> ";
           item = item->next;

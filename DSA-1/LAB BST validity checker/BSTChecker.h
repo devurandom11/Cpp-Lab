@@ -8,18 +8,18 @@
 #include "Node.h"
 
 class BSTChecker {
- public:
+public:
   // Check if a binary search tree is valid
-  static Node* CheckBSTValidity(Node* root) {
-    std::vector<Node*> ancestors;
+  static Node *CheckBSTValidity(Node *root) {
+    std::vector<Node *> ancestors;
     return LastTryHelper(root, std::numeric_limits<int>::min(),
                          std::numeric_limits<int>::max(), ancestors);
   }
 
- private:
+private:
   // Static helper method
-  static Node* LastTryHelper(Node* node, int minKey, int maxKey,
-                             std::vector<Node*>& ancestors) {
+  static Node *LastTryHelper(Node *node, int minKey, int maxKey,
+                             std::vector<Node *> &ancestors) {
     // Base case
     if (!node) {
       return nullptr;
@@ -40,9 +40,9 @@ class BSTChecker {
 
     // Recursive case
     ancestors.push_back(node);
-    Node* leftOffender =
+    Node *leftOffender =
         LastTryHelper(node->left, minKey, node->key - 1, ancestors);
-    Node* rightOffender =
+    Node *rightOffender =
         LastTryHelper(node->right, node->key + 1, maxKey, ancestors);
     ancestors.pop_back();
 

@@ -7,16 +7,15 @@
 #include "UndoCommand.h"
 
 class InsertAtCommand : public UndoCommand {
- private:
+private:
   int insertBefore;
   std::string insertItem;
-  std::vector<std::string>* sourceVector;
+  std::vector<std::string> *sourceVector;
 
- public:
+public:
   InsertAtCommand(int insertBefore, std::string insertItem,
-                  std::vector<std::string>* sourceVector)
-      : insertBefore(insertBefore),
-        insertItem(insertItem),
+                  std::vector<std::string> *sourceVector)
+      : insertBefore(insertBefore), insertItem(insertItem),
         sourceVector(sourceVector) {}
 
   void Execute() override {

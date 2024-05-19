@@ -4,10 +4,10 @@
 #include "AVLNode.h"
 
 class ExtendedAVLNode : public AVLNode {
- private:
+private:
   int subtreeKeyCount;
 
- public:
+public:
   ExtendedAVLNode(int nodeKey) : AVLNode(nodeKey) { subtreeKeyCount = 1; }
 
   virtual int GetSubtreeKeyCount() override { return subtreeKeyCount; }
@@ -19,10 +19,10 @@ class ExtendedAVLNode : public AVLNode {
   virtual void UpdateSubtreeKeyCount() {
     int count = 1;
     if (GetLeft()) {
-      count += static_cast<ExtendedAVLNode*>(GetLeft())->GetSubtreeKeyCount();
+      count += static_cast<ExtendedAVLNode *>(GetLeft())->GetSubtreeKeyCount();
     }
     if (GetRight()) {
-      count += static_cast<ExtendedAVLNode*>(GetRight())->GetSubtreeKeyCount();
+      count += static_cast<ExtendedAVLNode *>(GetRight())->GetSubtreeKeyCount();
     }
     SetSubtreeKeyCount(count);
   }

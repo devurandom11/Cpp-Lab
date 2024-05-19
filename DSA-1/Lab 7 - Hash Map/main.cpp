@@ -1,11 +1,10 @@
+#include "CourseGradebook.h"
+#include "Gradebook.h"
+#include "TestUtility.h"
 #include <iostream>
 #include <string>
 #include <unordered_map>
 #include <vector>
-
-#include "CourseGradebook.h"
-#include "Gradebook.h"
-#include "TestUtility.h"
 using namespace std;
 
 bool TestGetScoreAndSetScore();
@@ -14,7 +13,7 @@ bool TestGetSortedAssignmentNames();
 bool TestGetSortedStudentIDs();
 bool TestGetStudentScores();
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   bool result1 = TestGetScoreAndSetScore();
   bool result2 = TestGetAssignmentScores();
   bool result3 = TestGetSortedAssignmentNames();
@@ -42,13 +41,13 @@ bool TestGetScoreAndSetScore() {
   // Each test case is a (assignmentName, studentID, expectedScore) tuple
   std::tuple<std::string, int, double> testCases[] = {
       std::make_tuple("Midterm", 11111, 91.0),
-      std::make_tuple("Homework 1", 22222, NAN),  // no entry
+      std::make_tuple("Homework 1", 22222, NAN), // no entry
       std::make_tuple("Homework 3", 55555, 71.5),
       std::make_tuple("Course project", 66666, 0.0),
       std::make_tuple("Homework 2", 10000, 90.0),
       std::make_tuple("Homework 4", 55555, 77.5),
-      std::make_tuple("Homework 5", 33333, NAN),  // no such assignment
-      std::make_tuple("Final exam", 44444, NAN),  // no entry
+      std::make_tuple("Homework 5", 33333, NAN), // no such assignment
+      std::make_tuple("Final exam", 44444, NAN), // no entry
       std::make_tuple("Homework 2", 77777, 76.0),
       std::make_tuple("Homework 1", 88888, 64.5)};
 
@@ -105,14 +104,14 @@ bool TestGetAssignmentScores() {
       pair<int, double>(90000, 85.0)};
 
   // Each test case is a (assignmentName, mapOfExpectedScores) pair
-  vector<pair<string, unordered_map<int, double>*>> testCases = {
+  vector<pair<string, unordered_map<int, double> *>> testCases = {
       make_pair("Homework 2", &hw2Scores), make_pair("Midterm", &midtermScores),
       make_pair("Course project", &projectScores)};
 
   // Iterate through all test cases
-  for (auto& testCase : testCases) {
+  for (auto &testCase : testCases) {
     string assignmentName = testCase.first;
-    unordered_map<int, double>& expectedMap = *(testCase.second);
+    unordered_map<int, double> &expectedMap = *(testCase.second);
 
     // Get the actual map from the gradebook
     cout << "Calling GetAssignmentScores(\"" << assignmentName;
@@ -277,16 +276,16 @@ bool TestGetStudentScores() {
       pair<string, double>("Final exam", 94.5)};
 
   // Each test case is a (studentID, mapOfExpectedScores) pair
-  vector<pair<int, unordered_map<string, double>*>> testCases = {
+  vector<pair<int, unordered_map<string, double> *>> testCases = {
       make_pair(22222, &student22222Scores),
       make_pair(44444, &student44444Scores),
       make_pair(88888, &student88888Scores),
       make_pair(90000, &student90000Scores)};
 
   // Iterate through all test cases
-  for (auto& testCase : testCases) {
+  for (auto &testCase : testCases) {
     int studentID = testCase.first;
-    unordered_map<string, double>& expectedMap = *(testCase.second);
+    unordered_map<string, double> &expectedMap = *(testCase.second);
 
     // Get the actual map from the gradebook
     cout << "Calling GetStudentScores(" << studentID;

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-bool ParseIndices(std::string str, int& outIndex1, int& outIndex2) {
+bool ParseIndices(std::string str, int &outIndex1, int &outIndex2) {
   auto spaceIndex = str.find(" ");
   if (spaceIndex == string::npos) {
     return false;
@@ -17,7 +17,7 @@ bool ParseIndices(std::string str, int& outIndex1, int& outIndex2) {
   return true;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   // Initialize a new grocery list
   GroceryList groceryList;
 

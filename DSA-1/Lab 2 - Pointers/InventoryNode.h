@@ -2,12 +2,12 @@
 #include <string>
 
 class InventoryNode {
- private:
+private:
   std::string item;
   int numberOfItems;
   InventoryNode *nextNodeRef;
 
- public:
+public:
   // Constructor
   InventoryNode() {
     this->item = "";

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <vector>
 
 #include "ChainingHashTable.h"
 #include "DoubleHashingHashTable.h"
@@ -20,7 +19,7 @@ int main() {
   const int initialCapacity = 11;
 
   // Initialize the four types of hash tables
-  HashTable<string, string>* tables[] = {
+  HashTable<string, string> *tables[] = {
       new ChainingHashTable<string, string>(initialCapacity),
       new LinearProbingHashTable<string, string>(initialCapacity),
       new QuadraticProbingHashTable<string, string>(1, 1, initialCapacity),

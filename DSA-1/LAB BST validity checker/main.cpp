@@ -4,15 +4,15 @@
 #include "./Node.h"
 using namespace std;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   // Get user input
   string userInput;
   getline(cin, userInput);
 
   // Parse into a binary ree
-  Node* userRoot = Node::Parse(userInput);
+  Node *userRoot = Node::Parse(userInput);
   if (userRoot) {
-    Node* badNode = BSTChecker::CheckBSTValidity(userRoot);
+    Node *badNode = BSTChecker::CheckBSTValidity(userRoot);
     if (badNode) {
       cout << to_string(badNode->key) << endl;
     } else {

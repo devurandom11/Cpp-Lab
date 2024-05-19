@@ -13,15 +13,15 @@
 // through a BST, visiting the same node twice implies that a circular
 // reference exists.
 class BSTNodeVectorVisitor : public BSTNodeVisitor {
- private:
+private:
   // visitedSet is used to ensure that the exact same node instance is not
   // visited more than once.
-  std::unordered_set<BSTNode*> visitedSet;
+  std::unordered_set<BSTNode *> visitedSet;
 
   bool hasCircRef;
 
- public:
-  std::vector<BSTNode*> visitedNodes;
+public:
+  std::vector<BSTNode *> visitedNodes;
 
   BSTNodeVectorVisitor() { hasCircRef = false; }
 
@@ -29,7 +29,7 @@ class BSTNodeVectorVisitor : public BSTNodeVisitor {
   // false otherwise.
   bool HasCircularReference() const { return hasCircRef; }
 
-  virtual bool Visit(BSTNode* node) {
+  virtual bool Visit(BSTNode *node) {
     // Check if the node was already visited. If so, the tree has a circular
     // reference.
     if (visitedSet.count(node) > 0) {

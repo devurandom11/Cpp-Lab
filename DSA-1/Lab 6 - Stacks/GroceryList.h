@@ -10,11 +10,11 @@
 #include "UndoCommand.h"
 
 class GroceryList {
- protected:
+protected:
   std::vector<std::string> listItems;
-  std::stack<UndoCommand*> undoStack;
+  std::stack<UndoCommand *> undoStack;
 
- public:
+public:
   virtual void AddWithUndo(std::string newItemName) {
     listItems.push_back(newItemName);
     undoStack.push(new RemoveLastCommand(&listItems));
@@ -43,7 +43,7 @@ class GroceryList {
 
   virtual void ExecuteUndo() {
     // TODO
-    UndoCommand* command = undoStack.top();
+    UndoCommand *command = undoStack.top();
     undoStack.pop();
     command->Execute();
     delete command;
@@ -55,7 +55,7 @@ class GroceryList {
 
   virtual std::vector<std::string> GetVectorCopy() const { return listItems; }
 
-  virtual void Print(std::ostream& outputStream) {
+  virtual void Print(std::ostream &outputStream) {
     for (size_t i = 0; i < listItems.size(); i++) {
       outputStream << i << ". " << listItems[i] << std::endl;
     }

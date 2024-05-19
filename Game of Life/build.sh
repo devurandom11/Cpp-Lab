@@ -2,7 +2,7 @@
 set -xe
 
 if [ -f GoL ]; then
-    rm GoL
+	rm GoL
 fi
 
 clang -O3 -Wall -Werror -Wpedantic -o GoL GOL.c -lm

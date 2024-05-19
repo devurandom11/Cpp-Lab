@@ -7,7 +7,7 @@
 #include <vector>
 
 class Node {
- private:
+private:
   static std::string RemoveLeadingWhitespace(std::string str) {
     int i = 0;
     while (i < (int)str.length()) {
@@ -24,12 +24,12 @@ class Node {
     return std::string();
   }
 
- public:
+public:
   int key;
-  Node* left;
-  Node* right;
+  Node *left;
+  Node *right;
 
-  Node(int nodeKey, Node* leftChild = nullptr, Node* rightChild = nullptr) {
+  Node(int nodeKey, Node *leftChild = nullptr, Node *rightChild = nullptr) {
     key = nodeKey;
     left = leftChild;
     right = rightChild;
@@ -50,7 +50,7 @@ class Node {
     return 1 + leftCount + rightCount;
   }
 
-  static void DeleteTree(Node* root) {
+  static void DeleteTree(Node *root) {
     if (root) {
       DeleteTree(root->left);
       DeleteTree(root->right);
@@ -59,8 +59,8 @@ class Node {
   }
 
   // Inserts the new node into the tree.
-  virtual void Insert(Node* node) {
-    Node* currentNode = this;
+  virtual void Insert(Node *node) {
+    Node *currentNode = this;
     while (currentNode) {
       if (node->key < currentNode->key) {
         if (currentNode->left) {
@@ -80,13 +80,13 @@ class Node {
     }
   }
 
-  virtual void InsertAll(const std::vector<int>& keys) {
+  virtual void InsertAll(const std::vector<int> &keys) {
     for (int key : keys) {
       Insert(new Node(key));
     }
   }
 
-  static Node* Parse(std::string treeString) {
+  static Node *Parse(std::string treeString) {
     // # A node is enclosed in parentheses with a either just a key: (key),
     // or a key, left child, and right child triplet: (key, left, right). The
     // left and right children, if present, can be either a nested node or
@@ -136,7 +136,7 @@ class Node {
     std::string piece3 = treeString.substr(i2 + 1);
 
     // Make the node with just the key
-    Node* nodeToReturn = new Node(stoi(piece1));
+    Node *nodeToReturn = new Node(stoi(piece1));
 
     // Recursively parse children
     nodeToReturn->left = Node::Parse(piece2);

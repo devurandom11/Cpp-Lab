@@ -8,11 +8,11 @@
 
 using namespace std;
 
-bool ExecuteTestCmds(vector<TreeTestCommand*>& testCommands,
-                     ostream& testFeedback);
-bool Test1(ostream& testFeedback);
-bool Test2(ostream& testFeedback);
-bool Test3(ostream& testFeedback);
+bool ExecuteTestCmds(vector<TreeTestCommand *> &testCommands,
+                     ostream &testFeedback);
+bool Test1(ostream &testFeedback);
+bool Test2(ostream &testFeedback);
+bool Test3(ostream &testFeedback);
 
 int main() {
   cout << "Test 1 - insertion and GetSubtreeKeyCount()" << endl;
@@ -31,15 +31,15 @@ int main() {
   cout << "Test 3: " << (test3Passed ? "PASS" : "FAIL") << endl;
 }
 
-bool ExecuteTestCmds(vector<TreeTestCommand*>& testCommands,
-                     ostream& testFeedback) {
+bool ExecuteTestCmds(vector<TreeTestCommand *> &testCommands,
+                     ostream &testFeedback) {
   bool passed = false;
   ExtendedAVLTree userTree;
-  for (TreeTestCommand* cmd : testCommands) {
+  for (TreeTestCommand *cmd : testCommands) {
     passed = false;
     try {
       passed = cmd->Execute(userTree, testFeedback);
-    } catch (runtime_error& err) {
+    } catch (runtime_error &err) {
       testFeedback << "Runtime error while executing test case" << endl;
       return false;
     }
@@ -58,8 +58,8 @@ bool ExecuteTestCmds(vector<TreeTestCommand*>& testCommands,
 // - Insertion of the 7 keys shown in the lab's sample tree
 // - Verify keys
 // - Verify subtree key counts
-bool Test1(ostream& testFeedback) {
-  vector<TreeTestCommand*> testCommands = {
+bool Test1(ostream &testFeedback) {
+  vector<TreeTestCommand *> testCommands = {
       new TreeInsertCommand({10, 20, 30, 55, 42, 19, 77}),
       new TreeVerifyKeysCommand({10, 19, 20, 30, 42, 55, 77}),
       new TreeVerifySubtreeCountsCommand({make_pair(10, 2), make_pair(19, 1),
@@ -75,10 +75,10 @@ bool Test1(ostream& testFeedback) {
 // - Verify subtree key counts
 // - Remove 1 key
 // - Verify subtree key counts
-bool Test2(ostream& testFeedback) {
-  vector<TreeTestCommand*> testCommands = {
+bool Test2(ostream &testFeedback) {
+  vector<TreeTestCommand *> testCommands = {
       new TreeInsertCommand(
-          {86, 75, 23, 30, 98, 67, 53, 9, 19, 58, 14}),  // 11 keys
+          {86, 75, 23, 30, 98, 67, 53, 9, 19, 58, 14}), // 11 keys
       new TreeVerifyKeysCommand({9, 14, 19, 23, 30, 53, 58, 67, 75, 86, 98}),
       new TreeVerifySubtreeCountsCommand(
           {make_pair(9, 2), make_pair(14, 1), make_pair(19, 4),
@@ -99,12 +99,12 @@ bool Test2(ostream& testFeedback) {
 // - Verify keys
 // - Test GetNthKey()
 // - Verify subtree key counts
-bool Test3(ostream& testFeedback) {
+bool Test3(ostream &testFeedback) {
   vector<int> keysToInsert = {10, 58, 66, 18, 34, 96, 5,  48, 73,
                               62, 36, 16, 23, 99, 92, 95, 46, 97};
   vector<int> sortedKeys = {5,  10, 16, 18, 23, 34, 36, 46, 48,
                             58, 62, 66, 73, 92, 95, 96, 97, 99};
-  vector<TreeTestCommand*> testCommands = {
+  vector<TreeTestCommand *> testCommands = {
       new TreeInsertCommand(keysToInsert),
       new TreeVerifyKeysCommand(sortedKeys),
       new TreeGetNthCommand(11, 66),

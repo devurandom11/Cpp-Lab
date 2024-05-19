@@ -4,11 +4,11 @@
 #include "BSTNode.h"
 
 class AVLNode : public BSTNode {
- private:
+private:
   int height;
 
   virtual int GetLeftHeight() {
-    AVLNode* leftChild = (AVLNode*)GetLeft();
+    AVLNode *leftChild = (AVLNode *)GetLeft();
     if (leftChild) {
       return leftChild->height;
     }
@@ -16,14 +16,14 @@ class AVLNode : public BSTNode {
   }
 
   virtual int GetRightHeight() {
-    AVLNode* rightChild = (AVLNode*)GetRight();
+    AVLNode *rightChild = (AVLNode *)GetRight();
     if (rightChild) {
       return rightChild->height;
     }
     return -1;
   }
 
- public:
+public:
   // Constructs the AVLNode with the given key. Left, right, and parent
   // pointers are assigned with nullptr and height is assigned with 0.
   AVLNode(int nodeKey) : BSTNode(nodeKey) { height = 0; }
@@ -43,7 +43,7 @@ class AVLNode : public BSTNode {
 
   virtual int GetHeight() { return height; }
 
-  virtual void SetLeft(BSTNode* newLeftChild) override {
+  virtual void SetLeft(BSTNode *newLeftChild) override {
     // Call parent class's SetLeft() first
     BSTNode::SetLeft(newLeftChild);
 
@@ -51,7 +51,7 @@ class AVLNode : public BSTNode {
     UpdateHeight();
   }
 
-  virtual void SetRight(BSTNode* newRightChild) override {
+  virtual void SetRight(BSTNode *newRightChild) override {
     // Call parent class's SetRight() first
     BSTNode::SetRight(newRightChild);
 

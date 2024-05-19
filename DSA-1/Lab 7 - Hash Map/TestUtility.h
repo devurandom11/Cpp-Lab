@@ -12,12 +12,13 @@
 #include "Gradebook.h"
 
 class TestUtility {
- public:
+public:
   // Populates a CourseGradebook from a vector of rows. Each row is a vector
   // of strings. Row 0 must be the header row. Column 0 must be the student ID
   // column.
-  static void PopulateGradebookFromRows(
-      Gradebook& gradebook, const std::vector<std::vector<std::string>>& rows) {
+  static void
+  PopulateGradebookFromRows(Gradebook &gradebook,
+                            const std::vector<std::vector<std::string>> &rows) {
     using namespace std;
 
     // Iterate through non-header rows
@@ -70,8 +71,8 @@ class TestUtility {
   }
 
   template <typename T>
-  static void PrintVector(const std::vector<T>& vectorToPrint,
-                          std::ostream& output, std::string separator = ",") {
+  static void PrintVector(const std::vector<T> &vectorToPrint,
+                          std::ostream &output, std::string separator = ",") {
     using namespace std;
 
     // Special case for empty vector

@@ -5,20 +5,20 @@
 
 template <typename K, typename V>
 class DoubleHashingHashTable : public OpenAddressingHashTable<K, V> {
- private:
+private:
   // The secondary hash function. Many different functions can
   // be used here. The function used here is a common one, with
   // different (usually prime number) constants used where the 7 is.
-  int H2(const K& key) const { return 7 - this->Hash(key) % 7; }
+  int H2(const K &key) const { return 7 - this->Hash(key) % 7; }
 
- public:
+public:
   DoubleHashingHashTable(int initialCapacity = 11)
       : OpenAddressingHashTable<K, V>(initialCapacity) {}
 
- protected:
+protected:
   // Returns the bucket index for the specified key and i value using the
   // double hashing probing sequence.
-  int Probe(const K& key, int i) const override {
+  int Probe(const K &key, int i) const override {
     return (this->Hash(key) + i * H2(key)) % this->table.size();
   }
 };

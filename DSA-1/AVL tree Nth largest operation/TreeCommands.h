@@ -12,21 +12,21 @@
 // TreeTestCommand is the abstract base class for a command that tests some
 // aspect of a BinarySearchTree object
 class TreeTestCommand {
- public:
+public:
   virtual ~TreeTestCommand() {}
 
-  virtual bool Execute(BinarySearchTree& tree, std::ostream& testFeedback) = 0;
+  virtual bool Execute(BinarySearchTree &tree, std::ostream &testFeedback) = 0;
 };
 
 // TreeInsertCommand inserts a vector of keys into the tree when executed
 class TreeInsertCommand : public TreeTestCommand {
- private:
+private:
   std::vector<int> keysToInsert;
 
- public:
-  TreeInsertCommand(const std::vector<int>& keys) : keysToInsert(keys) {}
+public:
+  TreeInsertCommand(const std::vector<int> &keys) : keysToInsert(keys) {}
 
-  bool Execute(BinarySearchTree& tree, std::ostream& testFeedback) override {
+  bool Execute(BinarySearchTree &tree, std::ostream &testFeedback) override {
     // If no keys to insert, return true immediately
     if (0 == keysToInsert.size()) {
       return true;
@@ -48,13 +48,13 @@ class TreeInsertCommand : public TreeTestCommand {
 
 // TreeRemoveCommand removes a vector of keys from the tree when executed
 class TreeRemoveCommand : public TreeTestCommand {
- private:
+private:
   std::vector<int> keysToRemove;
 
- public:
-  TreeRemoveCommand(const std::vector<int>& keys) : keysToRemove(keys) {}
+public:
+  TreeRemoveCommand(const std::vector<int> &keys) : keysToRemove(keys) {}
 
-  bool Execute(BinarySearchTree& tree, std::ostream& testFeedback) override {
+  bool Execute(BinarySearchTree &tree, std::ostream &testFeedback) override {
     if (keysToRemove.size() > 0) {
       // Begin feedback message and remove first key
       testFeedback << "Removing keys: " << keysToRemove[0];
@@ -73,13 +73,13 @@ class TreeRemoveCommand : public TreeTestCommand {
 
 // TreeVerifyKeysCommand verifies a BST's keys using an inorder traversal
 class TreeVerifyKeysCommand : public TreeTestCommand {
- private:
+private:
   std::vector<int> expectedKeys;
 
- public:
-  TreeVerifyKeysCommand(const std::vector<int>& keys) : expectedKeys(keys) {}
+public:
+  TreeVerifyKeysCommand(const std::vector<int> &keys) : expectedKeys(keys) {}
 
-  bool Execute(BinarySearchTree& tree, std::ostream& testFeedback) override {
+  bool Execute(BinarySearchTree &tree, std::ostream &testFeedback) override {
     using namespace std;
 
     // Create a BSTNodeVectorVisitor and do an in order traversal
@@ -96,7 +96,7 @@ class TreeVerifyKeysCommand : public TreeTestCommand {
 
     // Make a vector of keys from the visitor's vector of nodes
     vector<int> actual;
-    for (BSTNode* node : visitor.visitedNodes) {
+    for (BSTNode *node : visitor.visitedNodes) {
       actual.push_back(node->GetKey());
     }
 
@@ -121,7 +121,7 @@ class TreeVerifyKeysCommand : public TreeTestCommand {
     return pass;
   }
 
-  void PrintVector(std::vector<int>& vec, std::ostream& output,
+  void PrintVector(std::vector<int> &vec, std::ostream &output,
                    std::string separator = ",", std::string prefix = "",
                    std::string suffix = "") {
     output << prefix;
@@ -141,17 +141,17 @@ class TreeVerifyKeysCommand : public TreeTestCommand {
 // TreeGetNthCommand calls the BinarySearchTree's GetNthKey() function and
 // verifies that the returned key matches the expected.
 class TreeGetNthCommand : public TreeTestCommand {
- private:
+private:
   int n;
   int expectedKey;
 
- public:
+public:
   TreeGetNthCommand(int n, int expectedKey) {
     this->n = n;
     this->expectedKey = expectedKey;
   }
 
-  bool Execute(BinarySearchTree& tree, std::ostream& testFeedback) override {
+  bool Execute(BinarySearchTree &tree, std::ostream &testFeedback) override {
     int actualKey = tree.GetNthKey(n);
     if (actualKey == expectedKey) {
       testFeedback << "PASS: GetNthKey(" << n << ") returned ";
@@ -168,15 +168,15 @@ class TreeGetNthCommand : public TreeTestCommand {
 };
 
 class TreeVerifySubtreeCountsCommand : public TreeTestCommand {
- private:
+private:
   std::vector<std::pair<int, int>> expectedPairs;
 
- public:
+public:
   TreeVerifySubtreeCountsCommand(
-      const std::vector<std::pair<int, int>>& expectedKeyCountPairs)
+      const std::vector<std::pair<int, int>> &expectedKeyCountPairs)
       : expectedPairs(expectedKeyCountPairs) {}
 
-  bool Execute(BinarySearchTree& tree, std::ostream& testFeedback) override {
+  bool Execute(BinarySearchTree &tree, std::ostream &testFeedback) override {
     using namespace std;
 
     // Create a BSTNodeVectorVisitor and do an in order traversal
@@ -190,7 +190,7 @@ class TreeVerifySubtreeCountsCommand : public TreeTestCommand {
         int expectedCount = expectedPairs[i].second;
 
         // Get the actual node visited and the node's subtree key count
-        BSTNode* actualNode = visitor.visitedNodes[i];
+        BSTNode *actualNode = visitor.visitedNodes[i];
         int actualCount = actualNode->GetSubtreeKeyCount();
 
         // Compare actual vs. expected subtree key count

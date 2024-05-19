@@ -5,21 +5,21 @@
 
 template <typename K, typename V>
 class QuadraticProbingHashTable : public OpenAddressingHashTable<K, V> {
- private:
+private:
   int c1;
   int c2;
 
- public:
+public:
   QuadraticProbingHashTable(int c1 = 1, int c2 = 1, int initialCapacity = 11)
       : OpenAddressingHashTable<K, V>(initialCapacity) {
     this->c1 = c1;
     this->c2 = c2;
   }
 
- protected:
+protected:
   // Returns the bucket index for the specified key and i value using the
   // quadratic probing sequence.
-  int Probe(const K& key, int i) const override {
+  int Probe(const K &key, int i) const override {
     return (this->Hash(key) + c1 * i + c2 * i * i) % this->table.size();
   }
 };

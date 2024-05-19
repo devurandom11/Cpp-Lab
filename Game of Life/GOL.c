@@ -1,8 +1,8 @@
 // Include the necessary libraries
-#include <math.h>    // For mathematical operations
-#include <stdio.h>   // For input/output operations
-#include <stdlib.h>  // For miscellaneous functions like random number generation
-#include <time.h>    // For time-related functions
+#include <math.h>   // For mathematical operations
+#include <stdio.h>  // For input/output operations
+#include <stdlib.h> // For miscellaneous functions like random number generation
+#include <time.h>   // For time-related functions
 
 // Define the width and height of the grid
 #define WIDTH 50
@@ -30,32 +30,32 @@ float rand_float(void) { return (float)rand() / (float)RAND_MAX; }
 
 // Function to initialize the grid with random values
 void make_grid(void) {
-  srand(time(0));  // Seed the random number generator with the current time
-  size_t w = WIDTH / 3;   // Calculate the width of the area to be filled
-  size_t h = HEIGHT / 3;  // Calculate the height of the area to be filled
+  srand(time(0)); // Seed the random number generator with the current time
+  size_t w = WIDTH / 3;  // Calculate the width of the area to be filled
+  size_t h = HEIGHT / 3; // Calculate the height of the area to be filled
   for (size_t dy = 0; dy < h; dy++) {
     for (size_t dx = 0; dx < w; dx++) {
       size_t x =
-          dx + WIDTH / 2 - w / 2;  // Calculate the x-coordinate of the cell
+          dx + WIDTH / 2 - w / 2; // Calculate the x-coordinate of the cell
       size_t y =
-          dy + HEIGHT / 2 - h / 2;  // Calculate the y-coordinate of the cell
-      grid[y][x] = rand_float();    // Fill the cell with a random value
+          dy + HEIGHT / 2 - h / 2; // Calculate the y-coordinate of the cell
+      grid[y][x] = rand_float();   // Fill the cell with a random value
     }
   }
 }
 
 // Function to display the grid
 void display_grid(float grid[HEIGHT][WIDTH]) {
-  printf("\033[2J\033[H");  // Clear the console
+  printf("\033[2J\033[H"); // Clear the console
   for (size_t y = 0; y < HEIGHT; y++) {
     for (size_t x = 0; x < WIDTH; x++) {
       char shade =
           level[(int)(grid[y][x] *
-                      (LEVEL_COUNT - 1))];  // Calculate the character to be
-                                            // displayed based on the cell value
-      printf("%c%c", shade, shade);         // Print the character
+                      (LEVEL_COUNT - 1))]; // Calculate the character to be
+                                           // displayed based on the cell value
+      printf("%c%c", shade, shade);        // Print the character
     }
-    printf("\n");  // Print a newline at the end of each row
+    printf("\n"); // Print a newline at the end of each row
   }
 }
 
@@ -89,56 +89,56 @@ float transition(float n, float m) {
 
 // Function to compute the difference of the grid
 void compute_grid_diff(void) {
-  float ri = ra / 3;  // Calculate the radius of the inner circle
+  float ri = ra / 3; // Calculate the radius of the inner circle
   for (int cy = 0; cy < HEIGHT; ++cy) {
     for (int cx = 0; cx < WIDTH; ++cx) {
       float n = 0.0f,
-            N = 0.0f;  // Initialize the sum and count of the outer circle
+            N = 0.0f; // Initialize the sum and count of the outer circle
       float m = 0.0f,
-            M = 0.0f;  // Initialize the sum and count of the inner circle
+            M = 0.0f; // Initialize the sum and count of the inner circle
       for (int dy = -(ra - 1); dy <= (ra - 1); ++dy) {
         for (int dx = -(ra - 1); dx <= (ra - 1); ++dx) {
           int x = euclidean_mod(
-              cx + dx, WIDTH);  // Calculate the x-coordinate of the cell
+              cx + dx, WIDTH); // Calculate the x-coordinate of the cell
           int y = euclidean_mod(
-              cy + dy, HEIGHT);  // Calculate the y-coordinate of the cell
+              cy + dy, HEIGHT); // Calculate the y-coordinate of the cell
           float dist =
               dx * dx +
-              dy * dy;  // Calculate the distance from the center of the circle
-          if (dist <= ri * ri) {  // If the cell is in the inner circle
-            m += grid[y]
-                     [x];  // Add the cell value to the sum of the inner circle
-            M += 1;        // Increment the count of the inner circle
-          } else if (dist <= ra * ra) {  // If the cell is in the outer circle
-            n += grid[y]
-                     [x];  // Add the cell value to the sum of the outer circle
-            N += 1;        // Increment the count of the outer circle
+              dy * dy; // Calculate the distance from the center of the circle
+          if (dist <= ri * ri) { // If the cell is in the inner circle
+            m +=
+                grid[y][x]; // Add the cell value to the sum of the inner circle
+            M += 1;         // Increment the count of the inner circle
+          } else if (dist <= ra * ra) { // If the cell is in the outer circle
+            n +=
+                grid[y][x]; // Add the cell value to the sum of the outer circle
+            N += 1;         // Increment the count of the outer circle
           }
         }
       }
-      m /= M;  // Calculate the average of the inner circle
-      n /= N;  // Calculate the average of the outer circle
-      float temp = transition(n, m);  // Calculate the transition
+      m /= M; // Calculate the average of the inner circle
+      n /= N; // Calculate the average of the outer circle
+      float temp = transition(n, m); // Calculate the transition
       grid_diff[cy][cx] =
-          (2 * temp) - 1;  // Calculate the difference of the grid
+          (2 * temp) - 1; // Calculate the difference of the grid
     }
   }
 }
 
 // Main function
 int main(void) {
-  make_grid();           // Initialize the grid
-  for (;;) {             // Infinite loop
-    display_grid(grid);  // Display the grid
+  make_grid();          // Initialize the grid
+  for (;;) {            // Infinite loop
+    display_grid(grid); // Display the grid
 
-    compute_grid_diff();  // Compute the difference of the grid
+    compute_grid_diff(); // Compute the difference of the grid
     for (size_t y = 0; y < HEIGHT; ++y) {
       for (size_t x = 0; x < WIDTH; ++x) {
         grid[y][x] +=
-            dt * grid_diff[y][x];  // Update the grid based on the difference
-        clamp(&grid[y][x], 0.0f, 1.0f);  // Clamp the grid value between 0 and 1
+            dt * grid_diff[y][x]; // Update the grid based on the difference
+        clamp(&grid[y][x], 0.0f, 1.0f); // Clamp the grid value between 0 and 1
       }
     }
   }
-  return 0;  
+  return 0;
 }

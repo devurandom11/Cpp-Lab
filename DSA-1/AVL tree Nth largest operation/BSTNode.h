@@ -5,13 +5,13 @@
 #include <string>
 
 class BSTNode {
- private:
+private:
   int key;
-  BSTNode* parent;
-  BSTNode* left;
-  BSTNode* right;
+  BSTNode *parent;
+  BSTNode *left;
+  BSTNode *right;
 
- public:
+public:
   // Constructs the BSTNode with the given key. Left, right, and parent
   // pointers are assigned with nullptr.
   BSTNode(int nodeKey) {
@@ -25,11 +25,11 @@ class BSTNode {
 
   virtual int GetKey() { return key; }
 
-  virtual BSTNode* GetLeft() { return left; }
+  virtual BSTNode *GetLeft() { return left; }
 
-  virtual BSTNode* GetParent() { return parent; }
+  virtual BSTNode *GetParent() { return parent; }
 
-  virtual BSTNode* GetRight() { return right; }
+  virtual BSTNode *GetRight() { return right; }
 
   // GetSubtreeKeyCount() must be overridden in an inheriting class
   virtual int GetSubtreeKeyCount() { return -1; }
@@ -38,7 +38,7 @@ class BSTNode {
   // is on the left or right, and calls either SetLeft() or SetRight() with
   // the new node appropriately.
   // Returns true if the new child is assigned, false otherwise.
-  virtual bool ReplaceChild(BSTNode* currentChild, BSTNode* newChild) {
+  virtual bool ReplaceChild(BSTNode *currentChild, BSTNode *newChild) {
     if (left == currentChild) {
       SetLeft(newChild);
       return true;
@@ -54,7 +54,7 @@ class BSTNode {
 
   virtual void SetKey(int newKey) { key = newKey; }
 
-  virtual void SetLeft(BSTNode* newLeftChild) {
+  virtual void SetLeft(BSTNode *newLeftChild) {
     // Assign the left child
     left = newLeftChild;
 
@@ -66,7 +66,7 @@ class BSTNode {
 
   virtual void SetParentToNull() { parent = nullptr; }
 
-  virtual void SetRight(BSTNode* newRightChild) {
+  virtual void SetRight(BSTNode *newRightChild) {
     // Assign the right child
     right = newRightChild;
 

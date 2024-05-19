@@ -59,6 +59,7 @@ Implement RemoveLastCommand's Execute() member function to remove sourceVector's
     - Submitting code written so far to obtain partial credit is recommended before proceeding to the next step.
 
 - Step 5: Implement the SwapCommand class and GroceryList's SwapWithUndo() member function
+
   - Implement the SwapCommand class in SwapCommand.h. The class itself is declared, but no members yet exist. Add necessary member variables and member functions so that the command can undo swapping two items in the grocery list.
   - Implement GroceryList's SwapWithUndo() member function. The function swaps list items at the specified indices, then pushes a SwapCommand, to undo that swap, onto the undo stack.
 

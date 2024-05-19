@@ -7,7 +7,7 @@
 #include <vector>
 
 class Gradebook {
- public:
+public:
   virtual ~Gradebook() {}
 
   // GetScore() returns the specified student's score for the specified
@@ -24,8 +24,8 @@ class Gradebook {
   // the student's corresponding score for the specified assignment. An entry
   // exists in the returned map only if a score has been entered with the
   // SetScore() function.
-  virtual std::unordered_map<int, double> GetAssignmentScores(
-      std::string assignmentName) = 0;
+  virtual std::unordered_map<int, double>
+  GetAssignmentScores(std::string assignmentName) = 0;
 
   // GetSortedAssignmentNames() returns a vector with all distinct assignment
   // names, sorted in ascending order.
@@ -39,8 +39,8 @@ class Gradebook {
   // student whose ID matches the function parameter. GetStudentScores()
   // returns an unordered_map that maps an assignment name to the student's
   // corresponding score for that assignment.
-  virtual std::unordered_map<std::string, double> GetStudentScores(
-      int studentID) = 0;
+  virtual std::unordered_map<std::string, double>
+  GetStudentScores(int studentID) = 0;
 };
 
 #endif

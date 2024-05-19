@@ -7,11 +7,11 @@
 #include "UndoCommand.h"
 
 class RemoveLastCommand : public UndoCommand {
- private:
-  std::vector<std::string>* sourceVector;
+private:
+  std::vector<std::string> *sourceVector;
 
- public:
-  RemoveLastCommand(std::vector<std::string>* vector) : sourceVector(vector){};
+public:
+  RemoveLastCommand(std::vector<std::string> *vector) : sourceVector(vector){};
   void Execute() override { sourceVector->pop_back(); }
 };
 

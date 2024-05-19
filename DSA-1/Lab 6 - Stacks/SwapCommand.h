@@ -7,12 +7,12 @@
 #include "UndoCommand.h"
 
 class SwapCommand : public UndoCommand {
- private:
+private:
   int index1, index2;
-  std::vector<std::string>* sourceVector;
+  std::vector<std::string> *sourceVector;
 
- public:
-  SwapCommand(int index1, int index2, std::vector<std::string>* sourceVector)
+public:
+  SwapCommand(int index1, int index2, std::vector<std::string> *sourceVector)
       : index1(index1), index2(index2), sourceVector(sourceVector) {}
   void Execute() override {
     // TODO

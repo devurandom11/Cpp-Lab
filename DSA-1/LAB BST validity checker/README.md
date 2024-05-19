@@ -22,18 +22,18 @@ If the input is:
 
 which corresponds to the tree above, then the output is:
 
-    60    
+    60
 
 because 60 violates BST requirements by being in the left subtree of 50.
 
 Ex:
 If the input is:
 
-    (20, (10), (30, (29), (31)))    
+    (20, (10), (30, (29), (31)))
 
 which corresponds to the tree above, then the output is:
 
-    No violation    
+    No violation
 
 because all BST requirements are met.
 

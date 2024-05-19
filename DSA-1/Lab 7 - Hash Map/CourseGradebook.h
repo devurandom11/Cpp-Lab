@@ -6,16 +6,16 @@
 #include "Gradebook.h"
 
 class CourseGradebook : public Gradebook {
- protected:
+protected:
   // Your code here
 
- public:
+public:
   virtual ~CourseGradebook() {
     // Your code here, if needed
   }
 
-  std::unordered_map<int, double> GetAssignmentScores(
-      std::string assignmentName) override {
+  std::unordered_map<int, double>
+  GetAssignmentScores(std::string assignmentName) override {
     // Your code here (remove placeholder line below)
     return std::unordered_map<int, double>();
   }
@@ -41,8 +41,8 @@ class CourseGradebook : public Gradebook {
   // student whose ID equals the studentID parameter. Scores are returned as
   // an unordered_map that maps an assignment name to the student's
   // corresponding score for that assignment.
-  std::unordered_map<std::string, double> GetStudentScores(
-      int studentID) override {
+  std::unordered_map<std::string, double>
+  GetStudentScores(int studentID) override {
     // Your code here (remove placeholder line below)
     return std::unordered_map<std::string, double>();
   }

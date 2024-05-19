@@ -5,10 +5,10 @@
 #include "BSTNodeVisitor.h"
 
 class BinarySearchTree {
- protected:
-  BSTNode* root;
+protected:
+  BSTNode *root;
 
-  virtual void DeleteTree(BSTNode* subtreeRoot) {
+  virtual void DeleteTree(BSTNode *subtreeRoot) {
     if (subtreeRoot) {
       DeleteTree(subtreeRoot->GetLeft());
       DeleteTree(subtreeRoot->GetRight());
@@ -16,10 +16,10 @@ class BinarySearchTree {
     }
   }
 
-  bool InOrder(BSTNodeVisitor& visitor, BSTNode* current) const {
+  bool InOrder(BSTNodeVisitor &visitor, BSTNode *current) const {
     if (current) {
       // Visit left subtree first, if left child is non-null
-      BSTNode* left = current->GetLeft();
+      BSTNode *left = current->GetLeft();
       if (left) {
         if (!InOrder(visitor, left)) {
           return false;
@@ -33,7 +33,7 @@ class BinarySearchTree {
       }
 
       // Visit right subtree last, if right child is non-null
-      BSTNode* right = current->GetRight();
+      BSTNode *right = current->GetRight();
       if (right) {
         return InOrder(visitor, right);
       }
@@ -42,12 +42,12 @@ class BinarySearchTree {
   }
 
   // Inserts the node into the tree using the standard BST insertion algorithm
-  virtual void InsertNode(BSTNode* node) {
+  virtual void InsertNode(BSTNode *node) {
     // Check if tree is empty
     if (!root) {
       root = node;
     } else {
-      BSTNode* currentNode = root;
+      BSTNode *currentNode = root;
       while (currentNode) {
         // Choose to go left or right
         if (node->GetKey() < currentNode->GetKey()) {
@@ -75,20 +75,20 @@ class BinarySearchTree {
     }
   }
 
-  virtual BSTNode* MakeNewNode(int key) { return new BSTNode(key); }
+  virtual BSTNode *MakeNewNode(int key) { return new BSTNode(key); }
 
   // Removes the node from the tree using the standard BST removal algorithm
-  virtual bool RemoveNode(BSTNode* nodeToRemove) {
+  virtual bool RemoveNode(BSTNode *nodeToRemove) {
     if (!nodeToRemove) {
       return false;
     }
 
-    BSTNode* parent = nodeToRemove->GetParent();
+    BSTNode *parent = nodeToRemove->GetParent();
 
     // Case 1: Internal node with 2 children
     if (nodeToRemove->GetLeft() && nodeToRemove->GetRight()) {
       // Find successor
-      BSTNode* successorNode = nodeToRemove->GetRight();
+      BSTNode *successorNode = nodeToRemove->GetRight();
       while (successorNode->GetLeft()) {
         successorNode = successorNode->GetLeft();
       }
@@ -135,10 +135,10 @@ class BinarySearchTree {
 
   // Performs a left rotation at the given node. Returns the
   // subtree's new root.
-  virtual BSTNode* RotateLeft(BSTNode* node) {
-    BSTNode* parent = node->GetParent();
-    BSTNode* rightChild = node->GetRight();
-    BSTNode* rightLeftChild = rightChild->GetLeft();
+  virtual BSTNode *RotateLeft(BSTNode *node) {
+    BSTNode *parent = node->GetParent();
+    BSTNode *rightChild = node->GetRight();
+    BSTNode *rightLeftChild = rightChild->GetLeft();
 
     // Replace necessary children from the bottom up
     node->SetRight(rightLeftChild);
@@ -155,10 +155,10 @@ class BinarySearchTree {
 
   // Performs a right rotation at the given node. Returns the
   // subtree's new root.
-  virtual BSTNode* RotateRight(BSTNode* node) {
-    BSTNode* parent = node->GetParent();
-    BSTNode* leftChild = node->GetLeft();
-    BSTNode* leftRightChild = leftChild->GetRight();
+  virtual BSTNode *RotateRight(BSTNode *node) {
+    BSTNode *parent = node->GetParent();
+    BSTNode *leftChild = node->GetLeft();
+    BSTNode *leftRightChild = leftChild->GetRight();
 
     // Replace necessary children from the bottom up
     node->SetLeft(leftRightChild);
@@ -173,21 +173,21 @@ class BinarySearchTree {
     return node->GetParent();
   }
 
- public:
+public:
   BinarySearchTree() { root = nullptr; }
 
   virtual ~BinarySearchTree() { DeleteTree(root); }
 
   virtual int GetNthKey(int n) = 0;
 
-  virtual BSTNode* GetRoot() { return root; }
+  virtual BSTNode *GetRoot() { return root; }
 
   // Performs an inorder traversal of the BST. The visitor's Visit() function
   // is called for each node in the tree. The Visit() function returns true to
   // continue traversal, false to stop traversal. If every Visit() call
   // returns true, then true is returned. If Visit() returns false for any
   // node in the tree, thus terminating traversal, false is returned.
-  bool InOrder(BSTNodeVisitor& visitor) const { return InOrder(visitor, root); }
+  bool InOrder(BSTNodeVisitor &visitor) const { return InOrder(visitor, root); }
 
   virtual void InsertKey(int key) { InsertNode(MakeNewNode(key)); }
 
@@ -195,7 +195,7 @@ class BinarySearchTree {
   // key then nothing is done and false is returned. Otherwise the node is
   // removed and true is returned.
   virtual bool RemoveKey(int key) {
-    BSTNode* node = Search(key);
+    BSTNode *node = Search(key);
     if (!node) {
       return false;
     } else {
@@ -205,8 +205,8 @@ class BinarySearchTree {
 
   // Searches for a node with a matching key. Returns the node with the
   // matching key, or nullptr if no matching key exists in the tree.
-  virtual BSTNode* Search(int desiredKey) {
-    BSTNode* currentNode = root;
+  virtual BSTNode *Search(int desiredKey) {
+    BSTNode *currentNode = root;
     while (currentNode) {
       // Return the node if the key matches
       if (currentNode->GetKey() == desiredKey) {
