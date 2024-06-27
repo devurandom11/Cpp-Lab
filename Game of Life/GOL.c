@@ -5,8 +5,8 @@
 #include <time.h>   // For time-related functions
 
 // Define the width and height of the grid
-#define WIDTH 50
-#define HEIGHT 50
+#define WIDTH 100
+#define HEIGHT 100
 
 // Define the characters to be used for displaying the grid
 char level[] = ".-=coaA#@ ";
@@ -31,8 +31,8 @@ float rand_float(void) { return (float)rand() / (float)RAND_MAX; }
 // Function to initialize the grid with random values
 void make_grid(void) {
   srand(time(0)); // Seed the random number generator with the current time
-  size_t w = WIDTH / 3;  // Calculate the width of the area to be filled
-  size_t h = HEIGHT / 3; // Calculate the height of the area to be filled
+  size_t w = WIDTH / 6;  // Calculate the width of the area to be filled
+  size_t h = HEIGHT / 6; // Calculate the height of the area to be filled
   for (size_t dy = 0; dy < h; dy++) {
     for (size_t dx = 0; dx < w; dx++) {
       size_t x =
@@ -127,10 +127,9 @@ void compute_grid_diff(void) {
 
 // Main function
 int main(void) {
-  make_grid();          // Initialize the grid
-  for (;;) {            // Infinite loop
-    display_grid(grid); // Display the grid
-
+  make_grid();           // Initialize the grid
+  for (;;) {             // Infinite loop
+    display_grid(grid);  // Display the grid
     compute_grid_diff(); // Compute the difference of the grid
     for (size_t y = 0; y < HEIGHT; ++y) {
       for (size_t x = 0; x < WIDTH; ++x) {
