@@ -5,8 +5,8 @@
 #include <time.h>   // For time-related functions
 
 // Define the width and height of the grid
-#define WIDTH 100
-#define HEIGHT 100
+#define WIDTH 50
+#define HEIGHT 50
 
 // Define the characters to be used for displaying the grid
 char level[] = ".-=coaA#@ ";
@@ -23,7 +23,7 @@ float ra = 5.0f;
 float alpha = 0.028f;
 float b1 = 0.278f, b2 = 0.365f;
 float d1 = .267f, d2 = .445f;
-float dt = 0.0061f;
+float dt = 0.0025f;
 
 // Function to generate a random float between 0 and 1
 float rand_float(void) { return (float)rand() / (float)RAND_MAX; }
@@ -31,8 +31,8 @@ float rand_float(void) { return (float)rand() / (float)RAND_MAX; }
 // Function to initialize the grid with random values
 void make_grid(void) {
   srand(time(0)); // Seed the random number generator with the current time
-  size_t w = WIDTH / 6;  // Calculate the width of the area to be filled
-  size_t h = HEIGHT / 6; // Calculate the height of the area to be filled
+  size_t w = WIDTH / 3;  // Calculate the width of the area to be filled
+  size_t h = HEIGHT / 3; // Calculate the height of the area to be filled
   for (size_t dy = 0; dy < h; dy++) {
     for (size_t dx = 0; dx < w; dx++) {
       size_t x =
@@ -49,11 +49,11 @@ void display_grid(float grid[HEIGHT][WIDTH]) {
   printf("\033[2J\033[H"); // Clear the console
   for (size_t y = 0; y < HEIGHT; y++) {
     for (size_t x = 0; x < WIDTH; x++) {
-      char shade =
-          level[(int)(grid[y][x] *
-                      (LEVEL_COUNT - 1))]; // Calculate the character to be
-                                           // displayed based on the cell value
-      printf("%c%c", shade, shade);        // Print the character
+      char shade = level[(
+          int)(grid[y][x] *
+               (int)(LEVEL_COUNT - 1))]; // Calculate the character to be
+                                         // displayed based on the cell value
+      printf("%c%c", shade, shade);      // Print the character
     }
     printf("\n"); // Print a newline at the end of each row
   }
@@ -127,9 +127,10 @@ void compute_grid_diff(void) {
 
 // Main function
 int main(void) {
-  make_grid();           // Initialize the grid
-  for (;;) {             // Infinite loop
-    display_grid(grid);  // Display the grid
+  make_grid();          // Initialize the grid
+  for (;;) {            // Infinite loop
+    display_grid(grid); // Display the grid
+
     compute_grid_diff(); // Compute the difference of the grid
     for (size_t y = 0; y < HEIGHT; ++y) {
       for (size_t x = 0; x < WIDTH; ++x) {
