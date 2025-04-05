@@ -5,4 +5,5 @@ if [ -f GoL ]; then
 	rm GoL
 fi
 
-cc -O3 -Wall -Werror -Wpedantic -o GoL GOL.c -lm
+cc -O3 -o GoL GOL.c -lm -fopenmp
+
